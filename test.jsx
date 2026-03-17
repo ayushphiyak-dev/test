@@ -20,20 +20,25 @@ const G = () => (
     body { background: #FAFAF8; color: #0F172A; font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     :root {
       --teal: #0D9488; --teal-light: #CCFBF1; --teal-mid: #14B8A6; --teal-dark: #0F766E;
-      --slate: #0F172A; --slate-800: #1E293B; --slate-700: #334155; --slate-600: #475569;
-      --slate-500: #64748B; --slate-400: #94A3B8; --slate-300: #CBD5E1;
-      --slate-200: #E2E8F0; --slate-100: #F1F5F9; --slate-50: #F8FAFC;
+      --slate: #0C1117; --slate-800: #1A2433; --slate-700: #2D3F55; --slate-600: #445570;
+      --slate-500: #607490; --slate-400: #8EA4BF; --slate-300: #C2D0DF;
+      --slate-200: #DDE6EE; --slate-100: #EFF4F8; --slate-50: #F7FAFC;
       --ivory: #FAFAF8; --white: #FFFFFF;
-      --amber: #D97706; --amber-light: #FEF3C7;
+      --amber: #C87A00; --amber-light: #FEF3C7;
       --red: #DC2626; --red-light: #FEE2E2;
       --green: #16A34A; --green-light: #DCFCE7;
       --purple: #7C3AED; --purple-light: #EDE9FE;
-      --border: #E2E8F0; --border-strong: #CBD5E1;
-      --shadow-sm: 0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04);
-      --shadow-md: 0 4px 12px rgba(15,23,42,.08), 0 2px 6px rgba(15,23,42,.05);
-      --shadow-lg: 0 12px 32px rgba(15,23,42,.10), 0 4px 12px rgba(15,23,42,.06);
-      --shadow-xl: 0 24px 56px rgba(15,23,42,.12), 0 8px 20px rgba(15,23,42,.07);
-      --shadow-teal: 0 8px 24px rgba(13,148,136,.22), 0 2px 8px rgba(13,148,136,.12);
+      --border: #E4ECF3; --border-strong: #C5D3E0;
+      --shadow-sm: 0 1px 4px rgba(12,17,23,.04), 0 1px 2px rgba(12,17,23,.03);
+      --shadow-md: 0 4px 16px rgba(12,17,23,.07), 0 2px 6px rgba(12,17,23,.04);
+      --shadow-lg: 0 14px 40px rgba(12,17,23,.09), 0 5px 14px rgba(12,17,23,.05);
+      --shadow-xl: 0 28px 64px rgba(12,17,23,.11), 0 10px 26px rgba(12,17,23,.06);
+      --shadow-teal: 0 8px 28px rgba(13,148,136,.28), 0 3px 10px rgba(13,148,136,.16);
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px;
+      --ease-out: cubic-bezier(0.16,1,0.3,1);
+      --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
+      --transition-fast: 0.18s cubic-bezier(0.16,1,0.3,1);
+      --transition-base: 0.25s cubic-bezier(0.16,1,0.3,1);
     }
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--ivory); }
@@ -41,58 +46,58 @@ const G = () => (
     .brig { font-family: 'Bricolage Grotesque', sans-serif; }
 
     /* Cards */
-    .card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-sm); }
-    .card-lift { transition: box-shadow 0.25s ease, transform 0.25s ease; }
-    .card-lift:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
-    .card-interactive { transition: box-shadow 0.22s ease, transform 0.22s ease, background 0.22s ease; cursor: pointer; }
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+    .card-lift { transition: box-shadow var(--transition-base), transform var(--transition-base); }
+    .card-lift:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .card-interactive { transition: box-shadow var(--transition-base), transform var(--transition-base), background var(--transition-base); cursor: pointer; }
     .card-interactive:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .card-interactive:active { transform: scale(0.99); }
+    .card-interactive:active { transform: scale(0.985); }
 
     /* Buttons */
-    .btn-primary { background: var(--teal); color: #fff; font-family: 'DM Sans',sans-serif; font-weight: 600; font-size: 14px; padding: 11px 24px; border-radius: 12px; border: none; cursor: pointer; transition: background 0.2s, box-shadow 0.2s, transform 0.15s, opacity 0.2s; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; user-select: none; }
-    .btn-primary:hover:not(:disabled) { background: var(--teal-dark); box-shadow: var(--shadow-teal); transform: translateY(-1px); }
-    .btn-primary:active:not(:disabled) { transform: scale(0.97); box-shadow: none; }
-    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
-    .btn-secondary { background: var(--white); color: var(--slate); font-family: 'DM Sans',sans-serif; font-weight: 500; font-size: 14px; padding: 10px 22px; border-radius: 12px; border: 1.5px solid var(--border-strong); cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 7px; user-select: none; }
-    .btn-secondary:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-light); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+    .btn-primary { background: linear-gradient(145deg, var(--teal-mid) 0%, var(--teal-dark) 100%); color: #fff; font-family: 'DM Sans',sans-serif; font-weight: 600; font-size: 14px; padding: 11px 24px; border-radius: var(--radius-md); border: none; cursor: pointer; transition: all var(--transition-base); letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; user-select: none; box-shadow: 0 2px 8px rgba(13,148,136,.22), inset 0 1px 0 rgba(255,255,255,.12); }
+    .btn-primary:hover:not(:disabled) { background: linear-gradient(145deg, var(--teal) 0%, var(--teal-dark) 100%); box-shadow: var(--shadow-teal); transform: translateY(-1px); }
+    .btn-primary:active:not(:disabled) { transform: scale(0.97) translateY(0); box-shadow: none; }
+    .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn-secondary { background: var(--white); color: var(--slate-700); font-family: 'DM Sans',sans-serif; font-weight: 500; font-size: 14px; padding: 10px 22px; border-radius: var(--radius-md); border: 1.5px solid var(--border-strong); cursor: pointer; transition: all var(--transition-fast); display: inline-flex; align-items: center; gap: 7px; user-select: none; box-shadow: var(--shadow-sm); }
+    .btn-secondary:hover { border-color: var(--teal); color: var(--teal-dark); background: var(--teal-light); box-shadow: 0 4px 12px rgba(13,148,136,.12); transform: translateY(-1px); }
     .btn-secondary:active { transform: scale(0.97); }
-    .btn-ghost { background: transparent; color: var(--slate-500); font-family: 'DM Sans',sans-serif; font-weight: 500; font-size: 14px; padding: 9px 16px; border-radius: 10px; border: none; cursor: pointer; transition: color 0.18s, background 0.18s, transform 0.15s; display: inline-flex; align-items: center; gap: 6px; user-select: none; }
+    .btn-ghost { background: transparent; color: var(--slate-500); font-family: 'DM Sans',sans-serif; font-weight: 500; font-size: 14px; padding: 9px 16px; border-radius: 10px; border: none; cursor: pointer; transition: color var(--transition-fast), background var(--transition-fast), transform 0.15s; display: inline-flex; align-items: center; gap: 6px; user-select: none; }
     .btn-ghost:hover { color: var(--slate); background: var(--slate-100); }
     .btn-ghost:active { transform: scale(0.97); }
-    .btn-danger { display: flex; align-items: center; gap: 8px; padding: 10px 22px; background: rgba(220,38,38,.08); border: 1.5px solid rgba(220,38,38,.3); border-radius: 26px; cursor: pointer; color: #DC2626; font-family: 'DM Sans',sans-serif; font-weight: 600; font-size: 14px; transition: all 0.2s; user-select: none; }
-    .btn-danger:hover { background: #DC2626; color: #fff; border-color: #DC2626; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(220,38,38,.3); }
+    .btn-danger { display: flex; align-items: center; gap: 8px; padding: 10px 22px; background: rgba(220,38,38,.07); border: 1.5px solid rgba(220,38,38,.25); border-radius: 26px; cursor: pointer; color: #DC2626; font-family: 'DM Sans',sans-serif; font-weight: 600; font-size: 14px; transition: all var(--transition-base); user-select: none; }
+    .btn-danger:hover { background: #DC2626; color: #fff; border-color: #DC2626; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(220,38,38,.32); }
 
     /* Inputs */
-    input, select, textarea { background: var(--white); border: 1.5px solid var(--border-strong); color: var(--slate); border-radius: 10px; padding: 10px 14px; width: 100%; font-family: 'DM Sans',sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s, background 0.2s; box-shadow: var(--shadow-sm); }
+    input, select, textarea { background: var(--white); border: 1.5px solid var(--border-strong); color: var(--slate); border-radius: 10px; padding: 10px 14px; width: 100%; font-family: 'DM Sans',sans-serif; font-size: 14px; outline: none; transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast); box-shadow: var(--shadow-sm); }
     input::placeholder { color: var(--slate-400); }
-    input:focus, select:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(13,148,136,.12), var(--shadow-sm); }
+    input:focus, select:focus, textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(13,148,136,.12), var(--shadow-sm); background: #FDFFFF; }
     input:disabled { background: var(--slate-50); color: var(--slate-400); cursor: not-allowed; }
     select { appearance: none; cursor: pointer; }
-    label { font-size: 11.5px; font-weight: 700; color: var(--slate-600); margin-bottom: 6px; display: block; letter-spacing: 0.05em; text-transform: uppercase; }
+    label { font-size: 11px; font-weight: 700; color: var(--slate-500); margin-bottom: 7px; display: block; letter-spacing: 0.07em; text-transform: uppercase; }
 
     /* Nav */
-    .nav-link { font-size: 14px; font-weight: 500; color: var(--slate-500); padding: 6px 13px; border-radius: 8px; cursor: pointer; border: none; background: transparent; transition: color 0.18s, background 0.18s, transform 0.15s; white-space: nowrap; font-family: 'DM Sans',sans-serif; user-select: none; }
+    .nav-link { font-size: 13.5px; font-weight: 500; color: var(--slate-500); padding: 6px 13px; border-radius: 8px; cursor: pointer; border: none; background: transparent; transition: color var(--transition-fast), background var(--transition-fast), transform 0.15s; white-space: nowrap; font-family: 'DM Sans',sans-serif; user-select: none; }
     .nav-link:hover { color: var(--slate); background: var(--slate-100); transform: translateY(-1px); }
 
     /* Sidebar */
-    .sidebar-item { display: flex; align-items: center; gap: 10px; padding: 9px 13px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--slate-500); cursor: pointer; transition: all 0.18s; border: none; background: transparent; width: 100%; font-family: 'DM Sans',sans-serif; text-align: left; }
+    .sidebar-item { display: flex; align-items: center; gap: 10px; padding: 9px 13px; border-radius: 10px; font-size: 13.5px; font-weight: 500; color: var(--slate-500); cursor: pointer; transition: all var(--transition-fast); border: none; background: transparent; width: 100%; font-family: 'DM Sans',sans-serif; text-align: left; }
     .sidebar-item:hover { background: var(--slate-100); color: var(--slate); transform: translateX(2px); }
-    .sidebar-item.active { background: var(--teal-light); color: var(--teal-dark); font-weight: 600; }
+    .sidebar-item.active { background: linear-gradient(135deg, rgba(13,148,136,.12), rgba(13,148,136,.06)); color: var(--teal-dark); font-weight: 600; border-left: 3px solid var(--teal); padding-left: 10px; }
     .sidebar-item.active:hover { transform: none; }
 
     /* Feature cards — auto-fill equal-height grid adapts to any viewport */
     .feature-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(min(290px,100%),1fr)); gap: 20px; align-items: stretch; }
-    .feature-card { padding: 28px; border-radius: 16px; border: 1.5px solid var(--border); background: var(--ivory); transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s, background 0.25s; display: flex; flex-direction: column; height: 100%; }
-    .feature-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); background: var(--white); border-color: var(--border-strong); }
-    .feature-card .fc-icon { width: 44px; height: 44px; border-radius: 13px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; flex-shrink: 0; border-width: 1px; border-style: solid; transition: transform 0.25s, background 0.25s; }
-    .feature-card:hover .fc-icon { transform: scale(1.12) rotate(-3deg); }
-    .feature-card h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 15.5px; font-weight: 700; color: var(--slate); margin-bottom: 8px; letter-spacing: -0.01em; line-height: 1.25; }
-    .feature-card p { font-size: 13.5px; color: var(--slate-500); line-height: 1.7; flex: 1; }
+    .feature-card { padding: 28px; border-radius: var(--radius-lg); border: 1.5px solid var(--border); background: var(--ivory); transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base), background var(--transition-base); display: flex; flex-direction: column; height: 100%; }
+    .feature-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); background: var(--white); border-color: transparent; }
+    .feature-card .fc-icon { width: 44px; height: 44px; border-radius: 13px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; flex-shrink: 0; border-width: 1px; border-style: solid; transition: transform var(--transition-base), background var(--transition-base); }
+    .feature-card:hover .fc-icon { transform: scale(1.14) rotate(-4deg); }
+    .feature-card h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 15.5px; font-weight: 700; color: var(--slate); margin-bottom: 8px; letter-spacing: -0.02em; line-height: 1.25; }
+    .feature-card p { font-size: 13.5px; color: var(--slate-500); line-height: 1.72; flex: 1; }
 
     /* Pricing */
-    .pricing-card { border-radius: 20px; padding: 32px 28px; position: relative; transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; }
-    .pricing-card:hover { transform: translateY(-5px); }
-    .pricing-card.hi:hover { box-shadow: 0 32px 72px rgba(15,23,42,.28); }
+    .pricing-card { border-radius: var(--radius-xl); padding: 34px 28px; position: relative; transition: transform var(--transition-base), box-shadow var(--transition-base); display: flex; flex-direction: column; }
+    .pricing-card:hover { transform: translateY(-6px); }
+    .pricing-card.hi:hover { box-shadow: 0 36px 80px rgba(12,17,23,.3); }
     .pricing-card:not(.hi):hover { box-shadow: var(--shadow-xl); }
 
     /* Ticker */
@@ -139,7 +144,7 @@ const G = () => (
     .pulse-ring { animation: pulse-ring 2.2s ease-in-out infinite; }
 
     @keyframes text-shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-    .text-shimmer { background: linear-gradient(90deg, var(--teal), var(--teal-mid), #818cf8, var(--teal)); background-size: 300% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: text-shimmer 4s ease infinite; }
+    .text-shimmer { background: linear-gradient(90deg, var(--teal-dark), var(--teal-mid), var(--teal), var(--teal-mid), var(--teal-dark)); background-size: 300% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: text-shimmer 4.5s ease infinite; }
 
     @keyframes tilt-in { from { opacity:0; transform:perspective(600px) rotateX(12deg) translateY(20px); } to { opacity:1; transform:perspective(600px) rotateX(0deg) translateY(0); } }
     .tilt-in { animation: tilt-in 0.6s cubic-bezier(0.16,1,0.3,1) both; }
@@ -169,8 +174,8 @@ const G = () => (
     .report-mid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(280px,100%),1fr)); gap: 20px; }
 
     /* ── Layout utilities ── */
-    .hero-pad { padding: clamp(80px,12vh,120px) clamp(20px,5vw,60px) clamp(48px,8vh,80px); }
-    .sec-pad { padding: clamp(56px,8vh,96px) clamp(20px,5vw,60px); }
+    .hero-pad { padding: clamp(88px,13vh,130px) clamp(20px,5vw,60px) clamp(56px,9vh,88px); }
+    .sec-pad { padding: clamp(64px,9vh,108px) clamp(20px,5vw,60px); }
     .dash-main { padding: clamp(72px,10vh,88px) clamp(16px,3vw,40px) clamp(32px,5vh,48px); min-height: 100vh; box-sizing: border-box; }
     .card-constrain { max-width: 900px; margin-left: auto; margin-right: auto; width: 100%; }
     .step-grid > * { display: flex; flex-direction: column; }
@@ -377,12 +382,12 @@ const G = () => (
     @keyframes countdown-pop { 0%{transform:scale(0.4);opacity:0;} 60%{transform:scale(1.1);} 100%{transform:scale(1);opacity:1;} }
 
     /* Tip card */
-    .tip-card { background:linear-gradient(135deg,#0F172A,#1E293B); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:20px 22px; position:relative; overflow:hidden; }
-    .tip-card::before { content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px; background:radial-gradient(circle,rgba(13,148,136,.35) 0%,transparent 70%); pointer-events:none; }
+    .tip-card { background:linear-gradient(135deg,#0C1117,#1A2433); border:1px solid rgba(255,255,255,.07); border-radius:var(--radius-lg); padding:20px 22px; position:relative; overflow:hidden; }
+    .tip-card::before { content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px; background:radial-gradient(circle,rgba(13,148,136,.32) 0%,transparent 70%); pointer-events:none; }
 
     /* Quick-start preset buttons */
-    .preset-btn { flex:1; min-width:130px; padding:11px 14px; background:var(--white); border:1.5px solid var(--border); border-radius:12px; cursor:pointer; transition:all 0.2s; font-family:'DM Sans',sans-serif; display:flex; flex-direction:column; align-items:flex-start; gap:3px; }
-    .preset-btn:hover { border-color:var(--teal); background:var(--teal-light); transform:translateY(-2px); box-shadow:var(--shadow-md); }
+    .preset-btn { flex:1; min-width:130px; padding:12px 14px; background:var(--white); border:1.5px solid var(--border); border-radius:12px; cursor:pointer; transition:all var(--transition-base); font-family:'DM Sans',sans-serif; display:flex; flex-direction:column; align-items:flex-start; gap:3px; box-shadow:var(--shadow-sm); }
+    .preset-btn:hover { border-color:var(--teal); background:var(--teal-light); transform:translateY(-3px); box-shadow:0 8px 24px rgba(13,148,136,.14); }
     @media (max-width:480px) { .preset-btn { min-width:0; flex:1 1 calc(50% - 6px); } }
 
     /* Keyboard shortcut badge */
@@ -395,16 +400,17 @@ const G = () => (
     /* ── FAQ accordion ── */
     .faq-item { border-bottom:1px solid var(--border); }
     .faq-item:last-child { border-bottom:none; }
-    .faq-btn { width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:20px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; font-family:'DM Sans',sans-serif; }
+    .faq-btn { width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:22px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; font-family:'DM Sans',sans-serif; transition:color var(--transition-fast); }
+    .faq-btn:hover { color:var(--teal-dark); }
     .faq-btn:hover .faq-chevron { color:var(--teal); transform:scale(1.15); }
-    .faq-chevron { transition:transform 0.25s, color 0.2s; color:var(--slate-400); flex-shrink:0; }
+    .faq-chevron { transition:transform 0.28s var(--ease-out), color var(--transition-fast); color:var(--slate-400); flex-shrink:0; }
 
     /* ── Footer ── */
-    .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:clamp(28px,4vw,48px); padding:clamp(40px,8vh,64px) clamp(20px,5vw,60px) 40px; max-width:1200px; margin:0 auto; }
-    .footer-link { font-size:13.5px; color:rgba(255,255,255,.45); background:none; border:none; cursor:pointer; padding:5px 0; display:block; text-align:left; font-family:'DM Sans',sans-serif; transition:color 0.18s; width:fit-content; }
-    .footer-link:hover { color:rgba(255,255,255,.85); }
-    .footer-social { width:36px; height:36px; border-radius:9px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s; color:rgba(255,255,255,.5); }
-    .footer-social:hover { background:rgba(13,148,136,.25); border-color:rgba(13,148,136,.5); color:var(--teal-mid); transform:translateY(-2px); }
+    .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:clamp(28px,4vw,48px); padding:clamp(48px,8vh,72px) clamp(20px,5vw,60px) 48px; max-width:1200px; margin:0 auto; }
+    .footer-link { font-size:13.5px; color:rgba(255,255,255,.4); background:none; border:none; cursor:pointer; padding:5px 0; display:block; text-align:left; font-family:'DM Sans',sans-serif; transition:color var(--transition-fast), transform var(--transition-fast); width:fit-content; }
+    .footer-link:hover { color:rgba(255,255,255,.88); transform:translateX(3px); }
+    .footer-social { width:36px; height:36px; border-radius:9px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; transition:all var(--transition-base); color:rgba(255,255,255,.45); }
+    .footer-social:hover { background:rgba(13,148,136,.22); border-color:rgba(13,148,136,.45); color:var(--teal-mid); transform:translateY(-3px); box-shadow:0 6px 16px rgba(13,148,136,.2); }
     @media(max-width:900px){ .footer-grid { grid-template-columns:1fr 1fr; gap:36px; } }
     @media(max-width:580px){ .footer-grid { grid-template-columns:1fr; gap:28px; padding:48px 20px 32px; } }
 
@@ -582,22 +588,33 @@ const PLANS = [
 
 /* ── Atoms ── */
 const Logo = ({ onClick, light = false }) => (
-  <button onClick={onClick} style={{ display: "flex", alignItems: "center", gap: 9, background: "none", border: "none", cursor: "pointer", padding: 0, flexShrink: 0 }}>
-    <div style={{ width: 34, height: 34, borderRadius: 10, background: "var(--teal)", display: "flex", alignItems: "center", justifyContent: "center", transition: "transform 0.2s, box-shadow 0.2s" }}
-      onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.08)"; e.currentTarget.style.boxShadow = "var(--shadow-teal)"; }}
-      onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
-      <Zap size={18} color="#fff" strokeWidth={2.5} />
+  <button onClick={onClick} style={{ display: "flex", alignItems: "center", gap: 10, background: "none", border: "none", cursor: "pointer", padding: 0, flexShrink: 0 }}>
+    <div style={{ width: 36, height: 36, borderRadius: 10, background: "linear-gradient(145deg, var(--teal-mid), var(--teal-dark))", display: "flex", alignItems: "center", justifyContent: "center", transition: "transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease", boxShadow: "0 2px 8px rgba(13,148,136,.25)" }}
+      onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.07) rotate(-4deg)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(13,148,136,.4)"; }}
+      onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 2px 8px rgba(13,148,136,.25)"; }}>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 4.5H4.5V15.5H7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M13 4.5H15.5V15.5H13" stroke="rgba(255,255,255,0.45)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="10" cy="10" r="2.2" fill="white"/>
+      </svg>
     </div>
-    <span className="brig" style={{ fontSize: 19, fontWeight: 700, color: light ? "#ffffff" : "var(--slate)", letterSpacing: "-0.02em", whiteSpace: "nowrap" }}>
-      Placement<span style={{ color: light ? "var(--teal-mid)" : "var(--teal)" }}>Do</span>
+    <span className="brig" style={{ fontSize: 18.5, fontWeight: 700, color: light ? "#ffffff" : "var(--slate)", letterSpacing: "-0.03em", whiteSpace: "nowrap" }}>
+      Placement<span style={{ color: light ? "rgba(94,234,212,1)" : "var(--teal)" }}>Do</span>
     </span>
   </button>
 );
 
 const Tag = ({ children, color = "teal", size = "sm" }) => {
-  const P = { teal: { bg: "var(--teal-light)", color: "var(--teal-dark)" }, amber: { bg: "var(--amber-light)", color: "var(--amber)" }, green: { bg: "var(--green-light)", color: "var(--green)" }, red: { bg: "var(--red-light)", color: "var(--red)" }, slate: { bg: "var(--slate-100)", color: "var(--slate-700)" }, purple: { bg: "var(--purple-light)", color: "var(--purple)" } };
+  const P = {
+    teal:   { bg: "var(--teal-light)",   color: "var(--teal-dark)",    border: "rgba(13,148,136,.22)"  },
+    amber:  { bg: "var(--amber-light)",  color: "var(--amber)",        border: "rgba(200,122,0,.22)"   },
+    green:  { bg: "var(--green-light)",  color: "var(--green)",        border: "rgba(22,163,74,.22)"   },
+    red:    { bg: "var(--red-light)",    color: "var(--red)",          border: "rgba(220,38,38,.22)"   },
+    slate:  { bg: "var(--slate-100)",    color: "var(--slate-700)",    border: "rgba(12,17,23,.1)"     },
+    purple: { bg: "var(--purple-light)", color: "var(--purple)",       border: "rgba(124,58,237,.22)"  },
+  };
   const p = P[color] || P.teal;
-  return <span style={{ display: "inline-flex", alignItems: "center", gap: 5, background: p.bg, color: p.color, fontSize: size === "xs" ? 11 : 12, fontWeight: 600, padding: size === "xs" ? "3px 9px" : "4px 12px", borderRadius: 20, letterSpacing: "0.02em", whiteSpace: "nowrap" }}>{children}</span>;
+  return <span style={{ display: "inline-flex", alignItems: "center", gap: 5, background: p.bg, color: p.color, fontSize: size === "xs" ? 10.5 : 11.5, fontWeight: 700, padding: size === "xs" ? "3px 10px" : "4px 13px", borderRadius: 20, letterSpacing: "0.04em", whiteSpace: "nowrap", border: `1px solid ${p.border}` }}>{children}</span>;
 };
 
 const MetricBar = ({ label, value, color, delay = 0 }) => (
@@ -1031,7 +1048,7 @@ const Navbar = ({ view, onNav }) => {
   return (
     <>
       <motion.nav initial={{ y: -64, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}
-        style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: 64, padding: "0 clamp(16px,4vw,40px)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, background: bg ? "rgba(250,250,248,0.96)" : "transparent", backdropFilter: bg ? "blur(18px)" : "none", borderBottom: bg ? "1px solid var(--border)" : "none", transition: "all 0.3s ease" }}>
+        style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: 64, padding: "0 clamp(16px,4vw,40px)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, background: bg ? "rgba(250,250,248,0.94)" : "transparent", backdropFilter: bg ? "blur(20px)" : "none", borderBottom: bg ? "1px solid rgba(228,236,243,0.8)" : "none", transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)", boxShadow: bg ? "0 1px 0 rgba(228,236,243,0.5), 0 4px 24px rgba(12,17,23,.04)" : "none" }}>
         <Logo onClick={() => onNav("landing")} />
         <div className="nav-links-desk" style={{ display: "flex", gap: 4, alignItems: "center" }}>
           {isLanding && (<>
@@ -1154,7 +1171,10 @@ const Landing = ({ onNav, onCheckout }) => (
   <div style={{ background: "var(--ivory)" }}>
     {/* HERO */}
     <section className="hero-pad" style={{ minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"100px clamp(20px,5vw,60px) 80px", textAlign:"center", position:"relative", overflow:"hidden" }}>
-      <div style={{ position:"absolute", top:"30%", left:"50%", transform:"translate(-50%,-50%)", width:900, height:600, background:"radial-gradient(ellipse,rgba(13,148,136,.08) 0%,transparent 70%)", pointerEvents:"none" }}/>
+      {/* Layered background treatments for premium feel */}
+      <div style={{ position:"absolute", inset:0, background:"linear-gradient(160deg,rgba(13,148,136,.04) 0%,transparent 50%,rgba(13,148,136,.03) 100%)", pointerEvents:"none" }}/>
+      <div style={{ position:"absolute", top:"-5%", left:"50%", transform:"translateX(-50%)", width:1100, height:700, background:"radial-gradient(ellipse at 50% 40%,rgba(13,148,136,.11) 0%,transparent 68%)", pointerEvents:"none" }}/>
+      <div style={{ position:"absolute", bottom:0, left:0, right:0, height:200, background:"linear-gradient(to bottom,transparent,rgba(250,250,248,1))", pointerEvents:"none" }}/>
       <motion.div initial={{ opacity:0,y:24 }} animate={{ opacity:1,y:0 }} transition={{ duration:0.5 }}>
         <Tag color="teal"><Sparkles size={11}/> Coming Soon · Join the Waitlist</Tag>
       </motion.div>
@@ -1174,21 +1194,21 @@ const Landing = ({ onNav, onCheckout }) => (
       </motion.div>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }} className="stats-row" style={{ marginTop: 52 }}>
         {[{ n: "2,400+", l: "Waitlist signups" }, { n: "140+", l: "Target companies" }, { n: "28", l: "Languages planned" }, { n: "2026", l: "Launch year" }].map(({ n, l }) => (
-          <div key={l} style={{ textAlign: "center" }}>
-            <div className="brig" style={{ fontSize: "clamp(18px,2.5vw,26px)", fontWeight: 700, color: "var(--slate)", letterSpacing: "-0.02em" }}>{n}</div>
-            <div style={{ fontSize: 12, color: "var(--slate-500)", marginTop: 2 }}>{l}</div>
+          <div key={l} style={{ textAlign: "center", padding: "0 8px" }}>
+            <div className="brig" style={{ fontSize: "clamp(20px,2.8vw,30px)", fontWeight: 800, color: "var(--slate)", letterSpacing: "-0.03em", lineHeight: 1.1 }}>{n}</div>
+            <div style={{ fontSize: 12, color: "var(--slate-400)", marginTop: 4, fontWeight: 500 }}>{l}</div>
           </div>
         ))}
       </motion.div>
       <motion.div initial={{ opacity: 0, y: 48, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.8, delay: 0.52 }}
         className="float hero-preview" style={{ marginTop: 68, maxWidth: 780, width: "100%" }}>
-        <div className="card" style={{ borderRadius: 22, overflow: "hidden", boxShadow: "var(--shadow-xl)" }}>
+        <div className="card" style={{ borderRadius: 22, overflow: "hidden", boxShadow: "0 40px 100px rgba(12,17,23,.14), 0 12px 36px rgba(12,17,23,.08)" }}>
           <div style={{ padding: "12px 20px", background: "var(--slate-50)", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 8 }}>
             {["#FF5F57", "#FEBC2E", "#28C840"].map(c => <div key={c} style={{ width: 11, height: 11, borderRadius: "50%", background: c }} />)}
-            <span style={{ marginLeft: 8, fontSize: 12, color: "var(--slate-300)", fontWeight: 500 }}>placementdo.app · Live · Google · SWE L5</span>
+            <span style={{ marginLeft: 8, fontSize: 12, color: "var(--slate-400)", fontWeight: 500 }}>placementdo.app · Live · Google · SWE L5</span>
             <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 5 }}>
               <div className="dot-live" style={{ width: 7, height: 7, borderRadius: "50%", background: "#DC2626" }} />
-              <span style={{ fontSize: 11, fontWeight: 600, color: "#DC2626" }}>LIVE</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: "#DC2626", letterSpacing: "0.05em" }}>LIVE</span>
             </div>
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"2fr 1fr", background:"var(--white)" }}>
@@ -1229,42 +1249,42 @@ const Landing = ({ onNav, onCheckout }) => (
     </section>
 
     {/* HOW IT WORKS */}
-    <section className="sec-pad" style={{ padding:"100px clamp(20px,5vw,60px)", maxWidth:1100, margin:"0 auto" }}>
-      <motion.div initial={{ opacity:0,y:20 }} whileInView={{ opacity:1,y:0 }} transition={{ duration:0.55 }} viewport={{ once:true }} style={{ textAlign:"center", marginBottom:56 }}>
+    <section className="sec-pad" style={{ padding:"108px clamp(20px,5vw,60px)", maxWidth:1100, margin:"0 auto" }}>
+      <motion.div initial={{ opacity:0,y:20 }} whileInView={{ opacity:1,y:0 }} transition={{ duration:0.55 }} viewport={{ once:true }} style={{ textAlign:"center", marginBottom:60 }}>
         <Tag color="teal">Process</Tag>
-        <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,50px)", fontWeight: 700, color: "var(--slate)", letterSpacing: "-0.03em", marginTop: 14, lineHeight: 1.1 }}>From zero to hired in four steps</h2>
+        <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, color: "var(--slate)", letterSpacing: "-0.035em", marginTop: 16, lineHeight: 1.06 }}>From zero to hired in four steps</h2>
       </motion.div>
       <div className="step-grid">
         {[
           { icon: <Upload size={22} />, step: "01", title: "Upload your CV", desc: "AI parses your resume to craft hyper-relevant questions based on your exact skills and gaps.", color: "var(--teal)" },
           { icon: <Building2 size={22} />, step: "02", title: "Pick company & role", desc: "Target any of 140+ employers. Set the exact title, level, and interview focus area.", color: "#0369A1" },
-          { icon: <Video size={22} />, step: "03", title: "Live AI interview", desc: "Face-to-face with your AI interviewer. Real questions, real pressure, no second chances.", color: "#7C3AED" },
+          { icon: <Video size={22} />, step: "03", title: "Live AI interview", desc: "Face-to-face with your AI interviewer. Real questions, real pressure, no second chances.", color: "#9333EA" },
           { icon: <Award size={22} />, step: "04", title: "Get hired", desc: "Receive a scored, actionable report with a concrete path to your next improvement.", color: "var(--amber)" },
         ].map(({ icon, step, title, desc, color }, i) => (
           <motion.div key={step} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: i * 0.09 }} viewport={{ once: true }}
-            className="card card-lift" style={{ padding: "28px 24px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 18 }}>
-              <div style={{ width: 46, height: 46, borderRadius: 13, background: `${color}14`, display: "flex", alignItems: "center", justifyContent: "center", color, transition: "transform 0.22s, background 0.22s" }}
-                onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.1)"; e.currentTarget.style.background = `${color}22`; }}
+            className="card card-lift" style={{ padding: "30px 26px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
+              <div style={{ width: 46, height: 46, borderRadius: 13, background: `${color}14`, border: `1px solid ${color}22`, display: "flex", alignItems: "center", justifyContent: "center", color, transition: "transform 0.22s var(--ease-spring), background 0.22s" }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.12) rotate(-4deg)"; e.currentTarget.style.background = `${color}22`; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.background = `${color}14`; }}>
                 {icon}
               </div>
-              <span className="brig" style={{ fontSize: 13, fontWeight: 700, color: "var(--slate-200)" }}>{step}</span>
+              <span className="brig" style={{ fontSize: 13, fontWeight: 800, color: "var(--slate-200)", letterSpacing: "0.02em" }}>{step}</span>
             </div>
-            <h3 className="brig" style={{ fontSize: 17, fontWeight: 700, color: "var(--slate)", marginBottom: 8, letterSpacing: "-0.01em" }}>{title}</h3>
-            <p style={{ fontSize: 13.5, color: "var(--slate-500)", lineHeight: 1.68 }}>{desc}</p>
+            <h3 className="brig" style={{ fontSize: 17, fontWeight: 700, color: "var(--slate)", marginBottom: 9, letterSpacing: "-0.02em" }}>{title}</h3>
+            <p style={{ fontSize: 13.5, color: "var(--slate-500)", lineHeight: 1.72 }}>{desc}</p>
           </motion.div>
         ))}
       </div>
     </section>
 
     {/* FEATURES */}
-    <section id="features-section" style={{ padding: "80px clamp(20px,5vw,60px) 100px", background: "var(--white)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
+    <section id="features-section" style={{ padding: "96px clamp(20px,5vw,60px) 112px", background: "var(--white)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 52 }}>
-          <Tag color="slate">Why PlacementDo</Tag>
-          <h2 className="brig" style={{ fontSize: "clamp(24px,4vw,46px)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--slate)", marginTop: 14, lineHeight: 1.1 }}>The unfair advantage</h2>
-          <p style={{ fontSize: 16, color: "var(--slate-500)", maxWidth: 540, margin: "12px auto 0", lineHeight: 1.65 }}>Built on the same AI infrastructure used to train Fortune 500 hiring managers.</p>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 60 }}>
+          <Tag color="slate"><Zap size={10} /> Why PlacementDo</Tag>
+          <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, letterSpacing: "-0.035em", color: "var(--slate)", marginTop: 16, lineHeight: 1.06 }}>The unfair advantage</h2>
+          <p style={{ fontSize: 16.5, color: "var(--slate-500)", maxWidth: 540, margin: "14px auto 0", lineHeight: 1.72 }}>Built on the same AI infrastructure used to train Fortune 500 hiring managers.</p>
         </motion.div>
         <div className="feature-grid stagger">
           {[
@@ -1346,38 +1366,38 @@ const Landing = ({ onNav, onCheckout }) => (
     </section>
 
     {/* PRICING */}
-    <section id="pricing-section" style={{ padding: "100px clamp(20px,5vw,60px)", maxWidth: 1100, margin: "0 auto" }}>
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 52 }}>
+    <section id="pricing-section" style={{ padding: "108px clamp(20px,5vw,60px)", maxWidth: 1100, margin: "0 auto" }}>
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 60 }}>
         <Tag color="teal">Pricing</Tag>
-        <h2 className="brig" style={{ fontSize: "clamp(24px,4vw,46px)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--slate)", marginTop: 14, lineHeight: 1.1 }}>One interview could change everything</h2>
-        <p style={{ fontSize: 15, color: "var(--slate-500)", marginTop: 10 }}>No subscriptions. No auto-renewals. Join the waitlist for early-bird pricing.</p>
+        <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, letterSpacing: "-0.035em", color: "var(--slate)", marginTop: 16, lineHeight: 1.06 }}>One interview could change everything</h2>
+        <p style={{ fontSize: 15.5, color: "var(--slate-500)", marginTop: 12, lineHeight: 1.65 }}>No subscriptions. No auto-renewals. Join the waitlist for early-bird pricing.</p>
       </motion.div>
       <div className="pricing-grid stagger">
         {PLANS.map(({ name, price, old, hi, tagline, features }, i) => (
           <motion.div key={name} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }}
             className={`pricing-card ${hi ? "hi" : ""}`}
-            style={{ background: hi ? "var(--slate)" : "var(--white)", border: hi ? "1px solid var(--slate)" : "1px solid var(--border)", boxShadow: hi ? "var(--shadow-xl)" : "var(--shadow-sm)" }}>
-            {hi && <div style={{ position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)", background: "var(--teal)", color: "#fff", fontSize: 11, fontWeight: 700, padding: "4px 18px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.06em", boxShadow: "var(--shadow-teal)" }}>MOST POPULAR</div>}
-            <div style={{ fontSize: 12, fontWeight: 700, color: hi ? "rgba(255,255,255,.4)" : "var(--slate-300)", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 5 }}>{name}</div>
-            <div style={{ fontSize: 12.5, color: hi ? "rgba(255,255,255,.55)" : "var(--slate-500)", marginBottom: 18 }}>{tagline}</div>
-            <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 26 }}>
-              <span className="brig" style={{ fontSize: "clamp(34px,4vw,48px)", fontWeight: 800, color: hi ? "#fff" : "var(--slate)", letterSpacing: "-0.04em" }}>{price}</span>
-              {old && <span style={{ fontSize: 17, color: hi ? "rgba(255,255,255,.3)" : "var(--slate-300)", textDecoration: "line-through" }}>{old}</span>}
+            style={{ background: hi ? "var(--slate)" : "var(--white)", border: hi ? "1px solid rgba(255,255,255,.08)" : "1px solid var(--border)", boxShadow: hi ? "0 24px 64px rgba(12,17,23,.28), 0 6px 20px rgba(12,17,23,.18)" : "var(--shadow-sm)" }}>
+            {hi && <div style={{ position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)", background: "linear-gradient(135deg,var(--teal-mid),var(--teal-dark))", color: "#fff", fontSize: 10.5, fontWeight: 700, padding: "4px 18px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.08em", boxShadow: "var(--shadow-teal)" }}>MOST POPULAR</div>}
+            <div style={{ fontSize: 10.5, fontWeight: 800, color: hi ? "rgba(255,255,255,.35)" : "var(--slate-400)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 5 }}>{name}</div>
+            <div style={{ fontSize: 12.5, color: hi ? "rgba(255,255,255,.5)" : "var(--slate-500)", marginBottom: 20 }}>{tagline}</div>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 28 }}>
+              <span className="brig" style={{ fontSize: "clamp(34px,4vw,52px)", fontWeight: 800, color: hi ? "#fff" : "var(--slate)", letterSpacing: "-0.04em" }}>{price}</span>
+              {old && <span style={{ fontSize: 17, color: hi ? "rgba(255,255,255,.28)" : "var(--slate-300)", textDecoration: "line-through" }}>{old}</span>}
             </div>
-            <div style={{ height: 1, background: hi ? "rgba(255,255,255,.1)" : "var(--border)", marginBottom: 22 }} />
-            <div style={{ marginBottom: 26 }}>
+            <div style={{ height: 1, background: hi ? "rgba(255,255,255,.08)" : "var(--border)", marginBottom: 24 }} />
+            <div style={{ marginBottom: 28 }}>
               {features.map(f => (
                 <div key={f} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 11 }}>
-                  <div style={{ width: 17, height: 17, borderRadius: "50%", background: hi ? "rgba(255,255,255,.12)" : "var(--teal-light)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
-                    <Check size={9} style={{ color: hi ? "#fff" : "var(--teal)" }} strokeWidth={3} />
+                  <div style={{ width: 18, height: 18, borderRadius: "50%", background: hi ? "rgba(13,148,136,.25)" : "var(--teal-light)", border: hi ? "1px solid rgba(13,148,136,.35)" : "1px solid rgba(13,148,136,.2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
+                    <Check size={9} style={{ color: hi ? "var(--teal-mid)" : "var(--teal)" }} strokeWidth={3} />
                   </div>
-                  <span style={{ fontSize: 13.5, color: hi ? "rgba(255,255,255,.78)" : "var(--slate-700)", lineHeight: 1.5 }}>{f}</span>
+                  <span style={{ fontSize: 13.5, color: hi ? "rgba(255,255,255,.72)" : "var(--slate-700)", lineHeight: 1.55 }}>{f}</span>
                 </div>
               ))}
             </div>
             <button onClick={() => onCheckout(name)}
-              style={{ width: "100%", padding: "13px", borderRadius: 12, border: "none", background: hi ? "var(--teal)" : "var(--slate-100)", color: hi ? "#fff" : "var(--slate)", fontFamily: "'DM Sans',sans-serif", fontWeight: 600, fontSize: 14, cursor: "pointer", transition: "all 0.22s", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}
-              onMouseEnter={e => { e.currentTarget.style.background = hi ? "var(--teal-dark)" : "var(--slate-200)"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = hi ? "var(--shadow-teal)" : "var(--shadow-sm)"; }}
+              style={{ width: "100%", padding: "13px", borderRadius: 12, border: "none", background: hi ? "linear-gradient(145deg,var(--teal-mid),var(--teal-dark))" : "var(--slate-100)", color: hi ? "#fff" : "var(--slate)", fontFamily: "'DM Sans',sans-serif", fontWeight: 600, fontSize: 14, cursor: "pointer", transition: "all 0.22s", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, boxShadow: hi ? "0 2px 8px rgba(13,148,136,.25)" : "none" }}
+              onMouseEnter={e => { e.currentTarget.style.background = hi ? "linear-gradient(145deg,var(--teal),var(--teal-dark))" : "var(--slate-200)"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = hi ? "var(--shadow-teal)" : "var(--shadow-sm)"; }}
               onMouseLeave={e => { e.currentTarget.style.background = hi ? "var(--teal)" : "var(--slate-100)"; e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
               onMouseDown={e => e.currentTarget.style.transform = "scale(0.97)"}
               onMouseUp={e => e.currentTarget.style.transform = "translateY(-1px)"}>
@@ -1399,11 +1419,11 @@ const Landing = ({ onNav, onCheckout }) => (
       ];
       const [open, setOpen] = useState(null);
       return (
-        <section style={{ padding: "80px clamp(20px,5vw,60px) 100px", background: "var(--ivory)", borderTop: "1px solid var(--border)" }}>
+        <section style={{ padding: "96px clamp(20px,5vw,60px) 112px", background: "var(--ivory)", borderTop: "1px solid var(--border)" }}>
           <div style={{ maxWidth: 780, margin: "0 auto" }}>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 52 }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 56 }}>
               <Tag color="slate"><HelpCircle size={10} /> FAQ</Tag>
-              <h2 className="brig" style={{ fontSize: "clamp(24px,4vw,46px)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--slate)", marginTop: 14, lineHeight: 1.1 }}>Common questions</h2>
+              <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, letterSpacing: "-0.035em", color: "var(--slate)", marginTop: 16, lineHeight: 1.06 }}>Common questions</h2>
             </motion.div>
             <div className="card" style={{ overflow: "hidden" }}>
               {FAQS.map(({ q, a }, i) => (
@@ -1436,10 +1456,10 @@ const Landing = ({ onNav, onCheckout }) => (
 
     {/* WAITLIST CTA */}
     <section id="waitlist-section" style={{ padding: "96px clamp(20px,5vw,60px) 112px", background: "var(--slate)", position: "relative", overflow: "hidden" }}>
-      {/* Animated background blobs */}
-      <div style={{ position:"absolute", top:"20%", left:"10%", width:400, height:400, background:"radial-gradient(circle,rgba(13,148,136,.14) 0%,transparent 70%)", pointerEvents:"none", animation:"float-anim 8s ease-in-out infinite" }}/>
-      <div style={{ position:"absolute", bottom:"10%", right:"8%", width:300, height:300, background:"radial-gradient(circle,rgba(124,58,237,.1) 0%,transparent 70%)", pointerEvents:"none", animation:"float-anim 10s ease-in-out infinite reverse" }}/>
-      <div style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:900, height:600, background:"radial-gradient(ellipse,rgba(13,148,136,.18) 0%,transparent 65%)", pointerEvents:"none" }}/>
+      {/* Premium layered background (no garish gradients) */}
+      <div style={{ position:"absolute", top:"10%", left:"5%", width:500, height:500, background:"radial-gradient(circle,rgba(13,148,136,.12) 0%,transparent 70%)", pointerEvents:"none", animation:"float-anim 10s ease-in-out infinite" }}/>
+      <div style={{ position:"absolute", bottom:"5%", right:"5%", width:400, height:400, background:"radial-gradient(circle,rgba(13,148,136,.08) 0%,transparent 70%)", pointerEvents:"none", animation:"float-anim 12s ease-in-out infinite reverse" }}/>
+      <div style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:900, height:600, background:"radial-gradient(ellipse,rgba(13,148,136,.16) 0%,transparent 65%)", pointerEvents:"none" }}/>
 
       <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
         style={{ position: "relative", zIndex: 1, maxWidth: 660, margin: "0 auto" }}>
@@ -1489,15 +1509,15 @@ const Landing = ({ onNav, onCheckout }) => (
     </section>
 
     {/* FOOTER */}
-    <footer style={{ background: "var(--slate)", borderTop: "1px solid rgba(255,255,255,.06)" }}>
+    <footer style={{ background: "var(--slate)", borderTop: "1px solid rgba(255,255,255,.05)" }}>
       <div className="footer-grid">
         {/* Brand column */}
         <div>
           <Logo light />
-          <p style={{ fontSize: 13.5, color: "rgba(255,255,255,.4)", lineHeight: 1.7, marginTop: 14, maxWidth: 280 }}>
+          <p style={{ fontSize: 13.5, color: "rgba(255,255,255,.38)", lineHeight: 1.72, marginTop: 16, maxWidth: 280 }}>
             A hyper-realistic AI interview simulator that knows your CV, the company, and the exact role. Practice smarter. Land faster.
           </p>
-          <div style={{ display: "flex", gap: 8, marginTop: 20 }}>
+          <div style={{ display: "flex", gap: 8, marginTop: 22 }}>
             {[
               { icon: <MessageSquare size={15} />, label: "Twitter/X" },
               { icon: <Hash size={15} />, label: "LinkedIn" },
@@ -1510,7 +1530,7 @@ const Landing = ({ onNav, onCheckout }) => (
 
         {/* Product links */}
         <div>
-          <div className="brig" style={{ fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,.35)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>Product</div>
+          <div className="brig" style={{ fontSize: 11, fontWeight: 800, color: "rgba(255,255,255,.28)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 18 }}>Product</div>
           {["Features", "Pricing", "Personas", "How it works", "Changelog"].map(l => (
             <button key={l} className="footer-link">{l}</button>
           ))}
@@ -1518,7 +1538,7 @@ const Landing = ({ onNav, onCheckout }) => (
 
         {/* Company */}
         <div>
-          <div className="brig" style={{ fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,.35)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>Company</div>
+          <div className="brig" style={{ fontSize: 11, fontWeight: 800, color: "rgba(255,255,255,.28)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 18 }}>Company</div>
           {["About", "Blog", "Careers", "Privacy Policy", "Terms of Service"].map(l => (
             <button key={l} className="footer-link">{l}</button>
           ))}
@@ -1526,20 +1546,20 @@ const Landing = ({ onNav, onCheckout }) => (
 
         {/* Join waitlist */}
         <div>
-          <div className="brig" style={{ fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,.35)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16 }}>Get Early Access</div>
-          <p style={{ fontSize: 13, color: "rgba(255,255,255,.4)", lineHeight: 1.65, marginBottom: 14 }}>Join the waitlist and get 30% off at launch in 2026.</p>
+          <div className="brig" style={{ fontSize: 11, fontWeight: 800, color: "rgba(255,255,255,.28)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 18 }}>Get Early Access</div>
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,.38)", lineHeight: 1.68, marginBottom: 14 }}>Join the waitlist and get 30% off at launch in 2026.</p>
           <WaitlistForm size="sm" dark={true} />
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div style={{ borderTop: "1px solid rgba(255,255,255,.07)", padding: "16px clamp(20px,5vw,60px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10, maxWidth: 1200, margin: "0 auto" }}>
-        <span style={{ fontSize: 12, color: "rgba(255,255,255,.25)" }}>© 2026 PlacementDo. All rights reserved.</span>
+      <div style={{ borderTop: "1px solid rgba(255,255,255,.06)", padding: "18px clamp(20px,5vw,60px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10, maxWidth: 1200, margin: "0 auto" }}>
+        <span style={{ fontSize: 12, color: "rgba(255,255,255,.22)" }}>© 2026 PlacementDo. All rights reserved.</span>
         <div style={{ display: "flex", gap: 16 }}>
           {["Privacy", "Terms", "Cookies"].map(l => (
-            <button key={l} style={{ fontSize: 12, color: "rgba(255,255,255,.25)", background: "none", border: "none", cursor: "pointer", transition: "color 0.15s", fontFamily: "'DM Sans',sans-serif" }}
+            <button key={l} style={{ fontSize: 12, color: "rgba(255,255,255,.22)", background: "none", border: "none", cursor: "pointer", transition: "color 0.15s", fontFamily: "'DM Sans',sans-serif" }}
               onMouseEnter={e => e.currentTarget.style.color = "rgba(255,255,255,.6)"}
-              onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,.25)"}>{l}</button>
+              onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,.22)"}>{l}</button>
           ))}
         </div>
       </div>
