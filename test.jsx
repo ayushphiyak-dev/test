@@ -14,90 +14,95 @@ import {
 
 const G = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: #FAFAF8; color: #0F172A; font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body { background: #F7F5F0; color: #0B0E14; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
     :root {
-      --teal: #0D9488; --teal-light: #CCFBF1; --teal-mid: #14B8A6; --teal-dark: #0F766E;
-      --slate: #0C1117; --slate-800: #1A2433; --slate-700: #2D3F55; --slate-600: #445570;
-      --slate-500: #607490; --slate-400: #8EA4BF; --slate-300: #C2D0DF;
-      --slate-200: #DDE6EE; --slate-100: #EFF4F8; --slate-50: #F7FAFC;
-      --ivory: #FAFAF8; --white: #FFFFFF;
-      --amber: #C87A00; --amber-light: #FEF3C7;
-      --red: #DC2626; --red-light: #FEE2E2;
-      --green: #16A34A; --green-light: #DCFCE7;
-      --purple: #7C3AED; --purple-light: #EDE9FE;
-      --border: #E4ECF3; --border-strong: #C5D3E0;
-      --shadow-sm: 0 1px 4px rgba(12,17,23,.04), 0 1px 2px rgba(12,17,23,.03);
-      --shadow-md: 0 4px 16px rgba(12,17,23,.07), 0 2px 6px rgba(12,17,23,.04);
-      --shadow-lg: 0 14px 40px rgba(12,17,23,.09), 0 5px 14px rgba(12,17,23,.05);
-      --shadow-xl: 0 28px 64px rgba(12,17,23,.11), 0 10px 26px rgba(12,17,23,.06);
-      --shadow-teal: 0 8px 28px rgba(13,148,136,.28), 0 3px 10px rgba(13,148,136,.16);
-      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px;
+      --teal: #0D9488; --teal-light: #CBFAF3; --teal-mid: #14B8A6; --teal-dark: #0C6E63;
+      --slate: #0B0E14; --slate-800: #161C27; --slate-700: #253040; --slate-600: #384B60;
+      --slate-500: #536578; --slate-400: #839AAE; --slate-300: #B8C7D4;
+      --slate-200: #D5DFE8; --slate-100: #EAF0F5; --slate-50: #F3F7FA;
+      --ivory: #F7F5F0; --white: #FFFFFF;
+      --amber: #B86E00; --amber-light: #FEF0C0;
+      --red: #C82020; --red-light: #FEE2E2;
+      --green: #15963F; --green-light: #DCFCE7;
+      --purple: #6D2FDB; --purple-light: #EDE9FE;
+      --border: #DDD8CE; --border-strong: #BDB6AA;
+      --shadow-sm: 0 1px 3px rgba(11,14,20,.05), 0 1px 2px rgba(11,14,20,.04);
+      --shadow-md: 0 4px 14px rgba(11,14,20,.08), 0 2px 5px rgba(11,14,20,.04);
+      --shadow-lg: 0 12px 36px rgba(11,14,20,.10), 0 4px 12px rgba(11,14,20,.06);
+      --shadow-xl: 0 24px 64px rgba(11,14,20,.13), 0 8px 24px rgba(11,14,20,.07);
+      --shadow-teal: 0 8px 28px rgba(13,148,136,.30), 0 3px 10px rgba(13,148,136,.18);
+      --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-xl: 22px;
       --ease-out: cubic-bezier(0.16,1,0.3,1);
       --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
-      --transition-fast: 0.18s cubic-bezier(0.16,1,0.3,1);
-      --transition-base: 0.25s cubic-bezier(0.16,1,0.3,1);
+      --transition-fast: 0.16s cubic-bezier(0.16,1,0.3,1);
+      --transition-base: 0.24s cubic-bezier(0.16,1,0.3,1);
     }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--ivory); }
-    ::-webkit-scrollbar-thumb { background: var(--slate-300); border-radius: 3px; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
     .brig { font-family: 'Bricolage Grotesque', sans-serif; }
 
     /* Cards */
     .card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
     .card-lift { transition: box-shadow var(--transition-base), transform var(--transition-base); }
-    .card-lift:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .card-lift:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
     .card-interactive { transition: box-shadow var(--transition-base), transform var(--transition-base), background var(--transition-base); cursor: pointer; }
     .card-interactive:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-    .card-interactive:active { transform: scale(0.985); }
+    .card-interactive:active { transform: scale(0.987); }
 
     /* Buttons */
-    .btn-primary { background: linear-gradient(145deg, var(--teal-mid) 0%, var(--teal-dark) 100%); color: #fff; font-family: 'DM Sans',sans-serif; font-weight: 600; font-size: 14px; padding: 11px 24px; border-radius: var(--radius-md); border: none; cursor: pointer; transition: all var(--transition-base); letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; user-select: none; box-shadow: 0 2px 8px rgba(13,148,136,.22), inset 0 1px 0 rgba(255,255,255,.12); }
-    .btn-primary:hover:not(:disabled) { background: linear-gradient(145deg, var(--teal) 0%, var(--teal-dark) 100%); box-shadow: var(--shadow-teal); transform: translateY(-1px); }
+    .btn-primary { background: var(--slate); color: #fff; font-family: 'Plus Jakarta Sans',sans-serif; font-weight: 600; font-size: 13.5px; padding: 11px 22px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,.06); cursor: pointer; transition: all var(--transition-base); letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; user-select: none; box-shadow: 0 1px 3px rgba(11,14,20,.18), inset 0 1px 0 rgba(255,255,255,.07); }
+    .btn-primary:hover:not(:disabled) { background: var(--slate-800); box-shadow: 0 6px 20px rgba(11,14,20,.22); transform: translateY(-1px); }
     .btn-primary:active:not(:disabled) { transform: scale(0.97) translateY(0); box-shadow: none; }
-    .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
-    .btn-secondary { background: var(--white); color: var(--slate-700); font-family: 'DM Sans',sans-serif; font-weight: 500; font-size: 14px; padding: 10px 22px; border-radius: var(--radius-md); border: 1.5px solid var(--border-strong); cursor: pointer; transition: all var(--transition-fast); display: inline-flex; align-items: center; gap: 7px; user-select: none; box-shadow: var(--shadow-sm); }
-    .btn-secondary:hover { border-color: var(--teal); color: var(--teal-dark); background: var(--teal-light); box-shadow: 0 4px 12px rgba(13,148,136,.12); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-teal { background: var(--teal-dark); color: #fff; font-family: 'Plus Jakarta Sans',sans-serif; font-weight: 600; font-size: 13.5px; padding: 11px 22px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,.08); cursor: pointer; transition: all var(--transition-base); letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; user-select: none; box-shadow: 0 2px 8px rgba(13,148,136,.22), inset 0 1px 0 rgba(255,255,255,.1); }
+    .btn-teal:hover:not(:disabled) { background: var(--teal); box-shadow: var(--shadow-teal); transform: translateY(-1px); }
+    .btn-teal:active:not(:disabled) { transform: scale(0.97); box-shadow: none; }
+    .btn-secondary { background: var(--white); color: var(--slate-700); font-family: 'Plus Jakarta Sans',sans-serif; font-weight: 500; font-size: 13.5px; padding: 10px 20px; border-radius: var(--radius-md); border: 1px solid var(--border); cursor: pointer; transition: all var(--transition-fast); display: inline-flex; align-items: center; gap: 7px; user-select: none; box-shadow: 0 1px 2px rgba(11,14,20,.04); }
+    .btn-secondary:hover { border-color: var(--slate-400); color: var(--slate); box-shadow: var(--shadow-sm); transform: translateY(-1px); background: var(--slate-50); }
     .btn-secondary:active { transform: scale(0.97); }
-    .btn-ghost { background: transparent; color: var(--slate-500); font-family: 'DM Sans',sans-serif; font-weight: 500; font-size: 14px; padding: 9px 16px; border-radius: 10px; border: none; cursor: pointer; transition: color var(--transition-fast), background var(--transition-fast), transform 0.15s; display: inline-flex; align-items: center; gap: 6px; user-select: none; }
+    .btn-ghost { background: transparent; color: var(--slate-500); font-family: 'Plus Jakarta Sans',sans-serif; font-weight: 500; font-size: 13.5px; padding: 8px 14px; border-radius: 8px; border: none; cursor: pointer; transition: color var(--transition-fast), background var(--transition-fast), transform 0.15s; display: inline-flex; align-items: center; gap: 6px; user-select: none; }
     .btn-ghost:hover { color: var(--slate); background: var(--slate-100); }
     .btn-ghost:active { transform: scale(0.97); }
-    .btn-danger { display: flex; align-items: center; gap: 8px; padding: 10px 22px; background: rgba(220,38,38,.07); border: 1.5px solid rgba(220,38,38,.25); border-radius: 26px; cursor: pointer; color: #DC2626; font-family: 'DM Sans',sans-serif; font-weight: 600; font-size: 14px; transition: all var(--transition-base); user-select: none; }
-    .btn-danger:hover { background: #DC2626; color: #fff; border-color: #DC2626; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(220,38,38,.32); }
+    .btn-danger { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: rgba(200,32,32,.06); border: 1px solid rgba(200,32,32,.22); border-radius: 24px; cursor: pointer; color: #C82020; font-family: 'Plus Jakarta Sans',sans-serif; font-weight: 600; font-size: 13.5px; transition: all var(--transition-base); user-select: none; }
+    .btn-danger:hover { background: #C82020; color: #fff; border-color: #C82020; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(200,32,32,.30); }
 
     /* Inputs */
-    input, select, textarea { background: var(--white); border: 1.5px solid var(--border-strong); color: var(--slate); border-radius: 10px; padding: 10px 14px; width: 100%; font-family: 'DM Sans',sans-serif; font-size: 14px; outline: none; transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast); box-shadow: var(--shadow-sm); }
+    input, select, textarea { background: var(--white); border: 1px solid var(--border); color: var(--slate); border-radius: 9px; padding: 10px 14px; width: 100%; font-family: 'Plus Jakarta Sans',sans-serif; font-size: 14px; outline: none; transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast); box-shadow: var(--shadow-sm); }
     input::placeholder { color: var(--slate-400); }
-    input:focus, select:focus, textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(13,148,136,.12), var(--shadow-sm); background: #FDFFFF; }
+    input:focus, select:focus, textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(13,148,136,.10); background: var(--white); }
     input:disabled { background: var(--slate-50); color: var(--slate-400); cursor: not-allowed; }
     select { appearance: none; cursor: pointer; }
-    label { font-size: 11px; font-weight: 700; color: var(--slate-500); margin-bottom: 7px; display: block; letter-spacing: 0.07em; text-transform: uppercase; }
+    label { font-size: 10.5px; font-weight: 700; color: var(--slate-500); margin-bottom: 7px; display: block; letter-spacing: 0.09em; text-transform: uppercase; }
 
     /* Nav */
-    .nav-link { font-size: 13.5px; font-weight: 500; color: var(--slate-500); padding: 6px 13px; border-radius: 8px; cursor: pointer; border: none; background: transparent; transition: color var(--transition-fast), background var(--transition-fast), transform 0.15s; white-space: nowrap; font-family: 'DM Sans',sans-serif; user-select: none; }
-    .nav-link:hover { color: var(--slate); background: var(--slate-100); transform: translateY(-1px); }
+    .nav-link { font-size: 13px; font-weight: 500; color: var(--slate-500); padding: 6px 12px; border-radius: 7px; cursor: pointer; border: none; background: transparent; transition: color var(--transition-fast), background var(--transition-fast); white-space: nowrap; font-family: 'Plus Jakarta Sans',sans-serif; user-select: none; }
+    .nav-link:hover { color: var(--slate); background: var(--slate-100); }
 
     /* Sidebar */
-    .sidebar-item { display: flex; align-items: center; gap: 10px; padding: 9px 13px; border-radius: 10px; font-size: 13.5px; font-weight: 500; color: var(--slate-500); cursor: pointer; transition: all var(--transition-fast); border: none; background: transparent; width: 100%; font-family: 'DM Sans',sans-serif; text-align: left; }
-    .sidebar-item:hover { background: var(--slate-100); color: var(--slate); transform: translateX(2px); }
-    .sidebar-item.active { background: linear-gradient(135deg, rgba(13,148,136,.12), rgba(13,148,136,.06)); color: var(--teal-dark); font-weight: 600; border-left: 3px solid var(--teal); padding-left: 10px; }
-    .sidebar-item.active:hover { transform: none; }
+    .sidebar-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 9px; font-size: 13px; font-weight: 500; color: var(--slate-500); cursor: pointer; transition: all var(--transition-fast); border: none; background: transparent; width: 100%; font-family: 'Plus Jakarta Sans',sans-serif; text-align: left; }
+    .sidebar-item:hover { background: var(--slate-100); color: var(--slate); }
+    .sidebar-item.active { background: var(--slate-100); color: var(--slate); font-weight: 600; position: relative; }
+    .sidebar-item.active::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 2px; height: 60%; background: var(--teal); border-radius: 0 2px 2px 0; }
+    .sidebar-item.active:hover { background: var(--slate-100); }
 
     /* Feature cards — auto-fill equal-height grid adapts to any viewport */
     .feature-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(min(290px,100%),1fr)); gap: 20px; align-items: stretch; }
-    .feature-card { padding: 28px; border-radius: var(--radius-lg); border: 1.5px solid var(--border); background: var(--ivory); transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base), background var(--transition-base); display: flex; flex-direction: column; height: 100%; }
-    .feature-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); background: var(--white); border-color: transparent; }
-    .feature-card .fc-icon { width: 44px; height: 44px; border-radius: 13px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; flex-shrink: 0; border-width: 1px; border-style: solid; transition: transform var(--transition-base), background var(--transition-base); }
-    .feature-card:hover .fc-icon { transform: scale(1.14) rotate(-4deg); }
-    .feature-card h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 15.5px; font-weight: 700; color: var(--slate); margin-bottom: 8px; letter-spacing: -0.02em; line-height: 1.25; }
+    .feature-card { padding: 28px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--white); transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base); display: flex; flex-direction: column; height: 100%; }
+    .feature-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); border-color: transparent; }
+    .feature-card .fc-icon { width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; flex-shrink: 0; border-width: 1px; border-style: solid; transition: transform var(--transition-base), background var(--transition-base); }
+    .feature-card:hover .fc-icon { transform: scale(1.12) rotate(-4deg); }
+    .feature-card h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 15px; font-weight: 700; color: var(--slate); margin-bottom: 8px; letter-spacing: -0.025em; line-height: 1.25; }
     .feature-card p { font-size: 13.5px; color: var(--slate-500); line-height: 1.72; flex: 1; }
 
     /* Pricing */
-    .pricing-card { border-radius: var(--radius-xl); padding: 34px 28px; position: relative; transition: transform var(--transition-base), box-shadow var(--transition-base); display: flex; flex-direction: column; }
-    .pricing-card:hover { transform: translateY(-6px); }
-    .pricing-card.hi:hover { box-shadow: 0 36px 80px rgba(12,17,23,.3); }
+    .pricing-card { border-radius: var(--radius-xl); padding: 32px 28px; position: relative; transition: transform var(--transition-base), box-shadow var(--transition-base); display: flex; flex-direction: column; }
+    .pricing-card:hover { transform: translateY(-5px); }
+    .pricing-card.hi:hover { box-shadow: 0 32px 72px rgba(11,14,20,.35); }
     .pricing-card:not(.hi):hover { box-shadow: var(--shadow-xl); }
 
     /* Ticker */
@@ -375,23 +380,23 @@ const G = () => (
     @media (max-width:480px) { .report-actions button { flex:1 1 100%; justify-content:center; } }
 
     /* Share modal */
-    .share-link-box { display:flex; gap:8px; align-items:center; background:var(--slate-50); border:1.5px solid var(--border); border-radius:10px; padding:10px 14px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--slate-600); overflow:hidden; }
+    .share-link-box { display:flex; gap:8px; align-items:center; background:var(--slate-50); border:1.5px solid var(--border); border-radius:10px; padding:10px 14px; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; color:var(--slate-600); overflow:hidden; }
 
     /* Countdown overlay */
     @keyframes countdown-shrink { from { stroke-dashoffset:0; } to { stroke-dashoffset:188; } }
     @keyframes countdown-pop { 0%{transform:scale(0.4);opacity:0;} 60%{transform:scale(1.1);} 100%{transform:scale(1);opacity:1;} }
 
     /* Tip card */
-    .tip-card { background:linear-gradient(135deg,#0C1117,#1A2433); border:1px solid rgba(255,255,255,.07); border-radius:var(--radius-lg); padding:20px 22px; position:relative; overflow:hidden; }
-    .tip-card::before { content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px; background:radial-gradient(circle,rgba(13,148,136,.32) 0%,transparent 70%); pointer-events:none; }
+    .tip-card { background:linear-gradient(135deg,#0B0E14,#161C27); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius-lg); padding:20px 22px; position:relative; overflow:hidden; }
+    .tip-card::before { content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px; background:radial-gradient(circle,rgba(13,148,136,.22) 0%,transparent 70%); pointer-events:none; }
 
     /* Quick-start preset buttons */
-    .preset-btn { flex:1; min-width:130px; padding:12px 14px; background:var(--white); border:1.5px solid var(--border); border-radius:12px; cursor:pointer; transition:all var(--transition-base); font-family:'DM Sans',sans-serif; display:flex; flex-direction:column; align-items:flex-start; gap:3px; box-shadow:var(--shadow-sm); }
-    .preset-btn:hover { border-color:var(--teal); background:var(--teal-light); transform:translateY(-3px); box-shadow:0 8px 24px rgba(13,148,136,.14); }
+    .preset-btn { flex:1; min-width:130px; padding:12px 14px; background:var(--white); border:1px solid var(--border); border-radius:10px; cursor:pointer; transition:all var(--transition-base); font-family:'Plus Jakarta Sans',sans-serif; display:flex; flex-direction:column; align-items:flex-start; gap:3px; box-shadow:var(--shadow-sm); }
+    .preset-btn:hover { border-color:var(--slate-400); background:var(--slate-50); transform:translateY(-2px); box-shadow:var(--shadow-md); }
     @media (max-width:480px) { .preset-btn { min-width:0; flex:1 1 calc(50% - 6px); } }
 
     /* Keyboard shortcut badge */
-    .kbd { display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); border-radius:5px; padding:1px 6px; font-size:10px; font-weight:700; color:rgba(255,255,255,.6); font-family:'DM Sans',sans-serif; letter-spacing:0.02em; line-height:1.5; }
+    .kbd { display:inline-flex; align-items:center; justify-content:center; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); border-radius:5px; padding:1px 6px; font-size:10px; font-weight:700; color:rgba(255,255,255,.6); font-family:'Plus Jakarta Sans',sans-serif; letter-spacing:0.02em; line-height:1.5; }
 
     /* ── Testimonials grid ── */
     .testi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); gap:22px; }
@@ -400,17 +405,17 @@ const G = () => (
     /* ── FAQ accordion ── */
     .faq-item { border-bottom:1px solid var(--border); }
     .faq-item:last-child { border-bottom:none; }
-    .faq-btn { width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:22px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; font-family:'DM Sans',sans-serif; transition:color var(--transition-fast); }
+    .faq-btn { width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:22px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; font-family:'Plus Jakarta Sans',sans-serif; transition:color var(--transition-fast); }
     .faq-btn:hover { color:var(--teal-dark); }
     .faq-btn:hover .faq-chevron { color:var(--teal); transform:scale(1.15); }
     .faq-chevron { transition:transform 0.28s var(--ease-out), color var(--transition-fast); color:var(--slate-400); flex-shrink:0; }
 
     /* ── Footer ── */
     .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:clamp(28px,4vw,48px); padding:clamp(48px,8vh,72px) clamp(20px,5vw,60px) 48px; max-width:1200px; margin:0 auto; }
-    .footer-link { font-size:13.5px; color:rgba(255,255,255,.4); background:none; border:none; cursor:pointer; padding:5px 0; display:block; text-align:left; font-family:'DM Sans',sans-serif; transition:color var(--transition-fast), transform var(--transition-fast); width:fit-content; }
-    .footer-link:hover { color:rgba(255,255,255,.88); transform:translateX(3px); }
-    .footer-social { width:36px; height:36px; border-radius:9px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; transition:all var(--transition-base); color:rgba(255,255,255,.45); }
-    .footer-social:hover { background:rgba(13,148,136,.22); border-color:rgba(13,148,136,.45); color:var(--teal-mid); transform:translateY(-3px); box-shadow:0 6px 16px rgba(13,148,136,.2); }
+    .footer-link { font-size:13px; color:rgba(255,255,255,.35); background:none; border:none; cursor:pointer; padding:5px 0; display:block; text-align:left; font-family:'Plus Jakarta Sans',sans-serif; transition:color var(--transition-fast), transform var(--transition-fast); width:fit-content; }
+    .footer-link:hover { color:rgba(255,255,255,.80); transform:translateX(2px); }
+    .footer-social { width:34px; height:34px; border-radius:8px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; transition:all var(--transition-base); color:rgba(255,255,255,.38); }
+    .footer-social:hover { background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.18); color:rgba(255,255,255,.80); transform:translateY(-2px); }
     @media(max-width:900px){ .footer-grid { grid-template-columns:1fr 1fr; gap:36px; } }
     @media(max-width:580px){ .footer-grid { grid-template-columns:1fr; gap:28px; padding:48px 20px 32px; } }
 
@@ -419,7 +424,7 @@ const G = () => (
     .score-pop { animation:score-pop 0.65s cubic-bezier(0.175,0.885,0.32,1.275) both; }
 
     /* ── Interview room notes textarea ── */
-    .int-notes { resize:none; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:10px; color:rgba(255,255,255,.8); font-size:11.5px; padding:9px 12px; width:100%; font-family:'DM Sans',sans-serif; outline:none; line-height:1.6; transition:border-color 0.2s, box-shadow 0.2s; }
+    .int-notes { resize:none; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:10px; color:rgba(255,255,255,.8); font-size:11.5px; padding:9px 12px; width:100%; font-family:'Plus Jakarta Sans',sans-serif; outline:none; line-height:1.6; transition:border-color 0.2s, box-shadow 0.2s; }
     .int-notes::placeholder { color:rgba(255,255,255,.22); }
     .int-notes:focus { border-color:rgba(13,148,136,.55); box-shadow:0 0 0 3px rgba(13,148,136,.12); background:rgba(255,255,255,.08); }
 
@@ -589,17 +594,31 @@ const PLANS = [
 /* ── Atoms ── */
 const Logo = ({ onClick, light = false }) => (
   <button onClick={onClick} style={{ display: "flex", alignItems: "center", gap: 10, background: "none", border: "none", cursor: "pointer", padding: 0, flexShrink: 0 }}>
-    <div style={{ width: 36, height: 36, borderRadius: 10, background: "linear-gradient(145deg, var(--teal-mid), var(--teal-dark))", display: "flex", alignItems: "center", justifyContent: "center", transition: "transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease", boxShadow: "0 2px 8px rgba(13,148,136,.25)" }}
-      onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.07) rotate(-4deg)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(13,148,136,.4)"; }}
-      onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 2px 8px rgba(13,148,136,.25)"; }}>
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7 4.5H4.5V15.5H7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M13 4.5H15.5V15.5H13" stroke="rgba(255,255,255,0.45)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="10" cy="10" r="2.2" fill="white"/>
+    {/* New Logo: geometric monogram "P" mark */}
+    <div style={{
+      width: 32, height: 32, borderRadius: 8,
+      background: light ? "rgba(255,255,255,0.10)" : "var(--slate)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      transition: "transform 0.22s cubic-bezier(0.34,1.56,0.64,1)",
+      boxShadow: light ? "none" : "0 1px 4px rgba(11,14,20,.20), inset 0 1px 0 rgba(255,255,255,.06)",
+      border: light ? "1px solid rgba(255,255,255,.14)" : "1px solid rgba(255,255,255,.07)"
+    }}
+      onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.08) rotate(-5deg)"; }}
+      onMouseLeave={e => { e.currentTarget.style.transform = ""; }}>
+      {/* Geometric mark: two vertical bars with teal accent dot — editorial "progress" motif */}
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* left bar — short */}
+        <rect x="1" y="8" width="4" height="8" rx="1.5" fill={light ? "rgba(255,255,255,0.28)" : "rgba(255,255,255,0.26)"}/>
+        {/* center bar — tall */}
+        <rect x="7" y="2" width="4" height="14" rx="1.5" fill="white"/>
+        {/* right bar — medium */}
+        <rect x="13" y="5" width="4" height="11" rx="1.5" fill={light ? "rgba(255,255,255,0.52)" : "rgba(255,255,255,0.44)"}/>
+        {/* teal accent dot on center bar top */}
+        <circle cx="9" cy="1.2" r="1.4" fill={light ? "rgba(94,234,212,0.92)" : "var(--teal-mid)"}/>
       </svg>
     </div>
-    <span className="brig" style={{ fontSize: 18.5, fontWeight: 700, color: light ? "#ffffff" : "var(--slate)", letterSpacing: "-0.03em", whiteSpace: "nowrap" }}>
-      Placement<span style={{ color: light ? "rgba(94,234,212,1)" : "var(--teal)" }}>Do</span>
+    <span className="brig" style={{ fontSize: 17, fontWeight: 700, color: light ? "#ffffff" : "var(--slate)", letterSpacing: "-0.045em", whiteSpace: "nowrap", lineHeight: 1 }}>
+      Placement<span style={{ color: light ? "rgba(94,234,212,0.95)" : "var(--teal)" }}>Do</span>
     </span>
   </button>
 );
@@ -1048,17 +1067,17 @@ const Navbar = ({ view, onNav }) => {
   return (
     <>
       <motion.nav initial={{ y: -64, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}
-        style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: 64, padding: "0 clamp(16px,4vw,40px)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, background: bg ? "rgba(250,250,248,0.94)" : "transparent", backdropFilter: bg ? "blur(20px)" : "none", borderBottom: bg ? "1px solid rgba(228,236,243,0.8)" : "none", transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)", boxShadow: bg ? "0 1px 0 rgba(228,236,243,0.5), 0 4px 24px rgba(12,17,23,.04)" : "none" }}>
+        style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: 62, padding: "0 clamp(16px,4vw,40px)", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, background: bg ? "rgba(247,245,240,0.96)" : "transparent", backdropFilter: bg ? "blur(24px)" : "none", borderBottom: bg ? "1px solid rgba(221,216,206,0.7)" : "none", transition: "all 0.32s cubic-bezier(0.16,1,0.3,1)", boxShadow: bg ? "0 1px 0 rgba(221,216,206,0.4), 0 4px 20px rgba(11,14,20,.04)" : "none" }}>
         <Logo onClick={() => onNav("landing")} />
-        <div className="nav-links-desk" style={{ display: "flex", gap: 4, alignItems: "center" }}>
+        <div className="nav-links-desk" style={{ display: "flex", gap: 2, alignItems: "center" }}>
           {isLanding && (<>
             <button className="nav-link" onClick={() => scrollTo("features-section")}>Features</button>
             <button className="nav-link" onClick={() => scrollTo("pricing-section")}>Pricing</button>
-            <button className="nav-link" onClick={() => scrollTo("waitlist-section")}>Join Waitlist</button>
-            <div style={{ width: 1, height: 20, background: "var(--border)", margin: "0 6px" }} />
+            <button className="nav-link" onClick={() => scrollTo("waitlist-section")}>Waitlist</button>
+            <div style={{ width: 1, height: 18, background: "var(--border)", margin: "0 8px" }} />
           </>)}
           {!isLanding && <button className="btn-ghost" onClick={() => onNav("landing")}>← Home</button>}
-          <button className="btn-secondary" onClick={() => onNav("signin")} style={{ fontSize: 13 }}><LogIn size={14} /> Sign in</button>
+          <button className="btn-ghost" onClick={() => onNav("signin")} style={{ fontSize: 13 }}><LogIn size={14} /> Sign in</button>
           <button className="btn-primary" onClick={() => onNav("dashboard")} style={{ fontSize: 13 }}>Get started <ArrowUpRight size={14} /></button>
         </div>
         <button className="hamburger btn-ghost" style={{ display: "none", padding: 8 }} onClick={() => setMob(o => !o)}>
@@ -1067,8 +1086,8 @@ const Navbar = ({ view, onNav }) => {
       </motion.nav>
       <AnimatePresence>
         {mob && (
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.22 }}
-            style={{ position: "fixed", top: 64, left: 0, right: 0, zIndex: 99, background: "rgba(250,250,248,0.98)", backdropFilter: "blur(18px)", borderBottom: "1px solid var(--border)", padding: "16px 20px 24px", display: "flex", flexDirection: "column", gap: 8 }}>
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}
+            style={{ position: "fixed", top: 62, left: 0, right: 0, zIndex: 99, background: "rgba(247,245,240,0.98)", backdropFilter: "blur(24px)", borderBottom: "1px solid var(--border)", padding: "14px 20px 22px", display: "flex", flexDirection: "column", gap: 6 }}>
             {isLanding && (<>
               <button className="nav-link" style={{ textAlign: "left" }} onClick={() => scrollTo("features-section")}>Features</button>
               <button className="nav-link" style={{ textAlign: "left" }} onClick={() => scrollTo("pricing-section")}>Pricing</button>
@@ -1076,7 +1095,7 @@ const Navbar = ({ view, onNav }) => {
               <div style={{ height: 1, background: "var(--border)", margin: "4px 0" }} />
             </>)}
             {!isLanding && <button className="nav-link" style={{ textAlign: "left" }} onClick={() => onNav("landing")}>← Home</button>}
-            <button className="btn-secondary" onClick={() => { onNav("signin"); setMob(false); }} style={{ justifyContent: "center" }}><LogIn size={14} /> Sign in</button>
+            <button className="btn-ghost" onClick={() => { onNav("signin"); setMob(false); }} style={{ justifyContent: "center" }}><LogIn size={14} /> Sign in</button>
             <button className="btn-primary" onClick={() => { onNav("dashboard"); setMob(false); }} style={{ justifyContent: "center" }}>Get started <ArrowUpRight size={14} /></button>
           </motion.div>
         )}
@@ -1171,48 +1190,50 @@ const Landing = ({ onNav, onCheckout }) => (
   <div style={{ background: "var(--ivory)" }}>
     {/* HERO */}
     <section className="hero-pad" style={{ minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"100px clamp(20px,5vw,60px) 80px", textAlign:"center", position:"relative", overflow:"hidden" }}>
-      {/* Layered background treatments for premium feel */}
-      <div style={{ position:"absolute", inset:0, background:"linear-gradient(160deg,rgba(13,148,136,.04) 0%,transparent 50%,rgba(13,148,136,.03) 100%)", pointerEvents:"none" }}/>
-      <div style={{ position:"absolute", top:"-5%", left:"50%", transform:"translateX(-50%)", width:1100, height:700, background:"radial-gradient(ellipse at 50% 40%,rgba(13,148,136,.11) 0%,transparent 68%)", pointerEvents:"none" }}/>
-      <div style={{ position:"absolute", bottom:0, left:0, right:0, height:200, background:"linear-gradient(to bottom,transparent,rgba(250,250,248,1))", pointerEvents:"none" }}/>
+      {/* Premium layered background — warm, editorial, no AI clichés */}
+      <div style={{ position:"absolute", inset:0, background:"linear-gradient(175deg,rgba(13,148,136,.025) 0%,transparent 55%)", pointerEvents:"none" }}/>
+      <div style={{ position:"absolute", top:"-8%", left:"50%", transform:"translateX(-50%)", width:1200, height:800, background:"radial-gradient(ellipse at 50% 35%,rgba(13,148,136,.08) 0%,transparent 62%)", pointerEvents:"none" }}/>
+      <div style={{ position:"absolute", bottom:0, left:0, right:0, height:240, background:"linear-gradient(to bottom,transparent,rgba(247,245,240,1))", pointerEvents:"none" }}/>
+      {/* Subtle decorative grid lines */}
+      <div style={{ position:"absolute", inset:0, backgroundImage:"linear-gradient(rgba(11,14,20,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(11,14,20,.025) 1px,transparent 1px)", backgroundSize:"72px 72px", pointerEvents:"none", maskImage:"radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%)" }}/>
       <motion.div initial={{ opacity:0,y:24 }} animate={{ opacity:1,y:0 }} transition={{ duration:0.5 }}>
         <Tag color="teal"><Sparkles size={11}/> Coming Soon · Join the Waitlist</Tag>
       </motion.div>
       <motion.h1 initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.1 }} className="brig"
-        style={{ fontSize: "clamp(36px,6vw,82px)", fontWeight: 800, lineHeight: 1.06, letterSpacing: "-0.03em", color: "var(--slate)", marginTop: 22, marginBottom: 20, maxWidth: 900, wordBreak: "break-word" }}>
+        style={{ fontSize: "clamp(38px,6.5vw,88px)", fontWeight: 800, lineHeight: 1.02, letterSpacing: "-0.045em", color: "var(--slate)", marginTop: 22, marginBottom: 20, maxWidth: 920, wordBreak: "break-word" }}>
         Practice the Interview.{" "}<span className="text-shimmer">Land the Offer.</span>
       </motion.h1>
       <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.22 }}
-        style={{ fontSize: "clamp(15px,2vw,19px)", color: "var(--slate-500)", maxWidth: 600, lineHeight: 1.72, marginBottom: 36 }}>
+        style={{ fontSize: "clamp(15px,1.8vw,17.5px)", color: "var(--slate-500)", maxWidth: 540, lineHeight: 1.78, marginBottom: 36 }}>
         A hyper-realistic AI interviewer that knows your CV, the company, and the exact role. Multi-language support. Detailed scoring. Ruthlessly honest feedback.{" "}
-        <strong style={{ color: "var(--slate-700)" }}>Launching soon.</strong>
+        <strong style={{ color: "var(--slate-700)", fontWeight: 600 }}>Launching soon.</strong>
       </motion.p>
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35 }}
         style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, width: "100%", maxWidth: 520 }}>
         <WaitlistForm size="lg" />
-        <p style={{ fontSize: 12, color: "var(--slate-400)", fontWeight: 500 }}>No spam. No credit card. Just early access.</p>
+        <p style={{ fontSize: 12, color: "var(--slate-400)", fontWeight: 500, letterSpacing: "0.01em" }}>No spam. No credit card. Just early access.</p>
       </motion.div>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }} className="stats-row" style={{ marginTop: 52 }}>
         {[{ n: "2,400+", l: "Waitlist signups" }, { n: "140+", l: "Target companies" }, { n: "28", l: "Languages planned" }, { n: "2026", l: "Launch year" }].map(({ n, l }) => (
           <div key={l} style={{ textAlign: "center", padding: "0 8px" }}>
-            <div className="brig" style={{ fontSize: "clamp(20px,2.8vw,30px)", fontWeight: 800, color: "var(--slate)", letterSpacing: "-0.03em", lineHeight: 1.1 }}>{n}</div>
-            <div style={{ fontSize: 12, color: "var(--slate-400)", marginTop: 4, fontWeight: 500 }}>{l}</div>
+            <div className="brig" style={{ fontSize: "clamp(20px,2.8vw,32px)", fontWeight: 800, color: "var(--slate)", letterSpacing: "-0.04em", lineHeight: 1.1 }}>{n}</div>
+            <div style={{ fontSize: 11.5, color: "var(--slate-400)", marginTop: 4, fontWeight: 500 }}>{l}</div>
           </div>
         ))}
       </motion.div>
       <motion.div initial={{ opacity: 0, y: 48, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.8, delay: 0.52 }}
         className="float hero-preview" style={{ marginTop: 68, maxWidth: 780, width: "100%" }}>
-        <div className="card" style={{ borderRadius: 22, overflow: "hidden", boxShadow: "0 40px 100px rgba(12,17,23,.14), 0 12px 36px rgba(12,17,23,.08)" }}>
-          <div style={{ padding: "12px 20px", background: "var(--slate-50)", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 8 }}>
-            {["#FF5F57", "#FEBC2E", "#28C840"].map(c => <div key={c} style={{ width: 11, height: 11, borderRadius: "50%", background: c }} />)}
+        <div className="card" style={{ borderRadius: 20, overflow: "hidden", boxShadow: "0 36px 90px rgba(11,14,20,.12), 0 10px 30px rgba(11,14,20,.07), 0 0 0 1px rgba(11,14,20,.05)" }}>
+          <div style={{ padding: "11px 18px", background: "var(--slate-50)", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 8 }}>
+            {["#FF5F57", "#FEBC2E", "#28C840"].map(c => <div key={c} style={{ width: 10, height: 10, borderRadius: "50%", background: c }} />)}
             <span style={{ marginLeft: 8, fontSize: 12, color: "var(--slate-400)", fontWeight: 500 }}>placementdo.app · Live · Google · SWE L5</span>
             <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 5 }}>
-              <div className="dot-live" style={{ width: 7, height: 7, borderRadius: "50%", background: "#DC2626" }} />
-              <span style={{ fontSize: 11, fontWeight: 700, color: "#DC2626", letterSpacing: "0.05em" }}>LIVE</span>
+              <div className="dot-live" style={{ width: 7, height: 7, borderRadius: "50%", background: "#C82020" }} />
+              <span style={{ fontSize: 10.5, fontWeight: 700, color: "#C82020", letterSpacing: "0.07em" }}>LIVE</span>
             </div>
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"2fr 1fr", background:"var(--white)" }}>
-            <div style={{ padding:"26px 28px 22px", borderRight:"1px solid var(--border)" }}>
+            <div style={{ padding:"24px 26px 20px", borderRight:"1px solid var(--border)" }}>
               <Tag color="slate" size="xs">The Stress-Tester · Active</Tag>
               <p style={{ marginTop: 14, fontSize: 14.5, color: "var(--slate)", lineHeight: 1.72, fontStyle: "italic" }}>
                 "Given the scale you mentioned — 10M rps — walk me through the consistency vs. availability trade-offs in your caching layer."
@@ -1233,15 +1254,15 @@ const Landing = ({ onNav, onCheckout }) => (
     </section>
 
     {/* TICKER */}
-    <section style={{ padding: "48px 0", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", background: "var(--white)" }}>
-      <p style={{ textAlign: "center", fontSize: 11.5, color: "var(--slate-300)", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 26 }}>Building for people interviewing at</p>
+    <section style={{ padding: "40px 0", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)", background: "var(--white)" }}>
+      <p style={{ textAlign: "center", fontSize: 11, color: "var(--slate-300)", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 24 }}>Preparing candidates for top companies worldwide</p>
       <div className="ticker-wrap">
         <div className="ticker-track">
           {[...COMPANIES, ...COMPANIES].map((c, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, whiteSpace: "nowrap", opacity: 0.6, transition: "opacity 0.2s" }}
-              onMouseEnter={e => e.currentTarget.style.opacity = "1"} onMouseLeave={e => e.currentTarget.style.opacity = "0.6"}>
-              <div style={{ width: 34, height: 34, borderRadius: 9, background: c.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color: c.fg, fontFamily: "'Bricolage Grotesque',sans-serif" }}>{c.abbr}</div>
-              <span className="brig" style={{ fontSize: 15, fontWeight: 600, color: "var(--slate-700)" }}>{c.name}</span>
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 9, whiteSpace: "nowrap", opacity: 0.55, transition: "opacity 0.22s" }}
+              onMouseEnter={e => e.currentTarget.style.opacity = "1"} onMouseLeave={e => e.currentTarget.style.opacity = "0.55"}>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: c.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: c.fg, fontFamily: "'Bricolage Grotesque',sans-serif" }}>{c.abbr}</div>
+              <span className="brig" style={{ fontSize: 14.5, fontWeight: 600, color: "var(--slate-700)" }}>{c.name}</span>
             </div>
           ))}
         </div>
@@ -1249,29 +1270,29 @@ const Landing = ({ onNav, onCheckout }) => (
     </section>
 
     {/* HOW IT WORKS */}
-    <section className="sec-pad" style={{ padding:"108px clamp(20px,5vw,60px)", maxWidth:1100, margin:"0 auto" }}>
+    <section className="sec-pad" style={{ padding:"104px clamp(20px,5vw,60px)", maxWidth:1100, margin:"0 auto" }}>
       <motion.div initial={{ opacity:0,y:20 }} whileInView={{ opacity:1,y:0 }} transition={{ duration:0.55 }} viewport={{ once:true }} style={{ textAlign:"center", marginBottom:60 }}>
         <Tag color="teal">Process</Tag>
-        <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, color: "var(--slate)", letterSpacing: "-0.035em", marginTop: 16, lineHeight: 1.06 }}>From zero to hired in four steps</h2>
+        <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, color: "var(--slate)", letterSpacing: "-0.04em", marginTop: 16, lineHeight: 1.04 }}>From zero to hired in four steps</h2>
       </motion.div>
       <div className="step-grid">
         {[
-          { icon: <Upload size={22} />, step: "01", title: "Upload your CV", desc: "AI parses your resume to craft hyper-relevant questions based on your exact skills and gaps.", color: "var(--teal)" },
-          { icon: <Building2 size={22} />, step: "02", title: "Pick company & role", desc: "Target any of 140+ employers. Set the exact title, level, and interview focus area.", color: "#0369A1" },
-          { icon: <Video size={22} />, step: "03", title: "Live AI interview", desc: "Face-to-face with your AI interviewer. Real questions, real pressure, no second chances.", color: "#9333EA" },
-          { icon: <Award size={22} />, step: "04", title: "Get hired", desc: "Receive a scored, actionable report with a concrete path to your next improvement.", color: "var(--amber)" },
+          { icon: <Upload size={20} />, step: "01", title: "Upload your CV", desc: "AI parses your resume to craft hyper-relevant questions based on your exact skills and gaps.", color: "var(--teal)" },
+          { icon: <Building2 size={20} />, step: "02", title: "Pick company & role", desc: "Target any of 140+ employers. Set the exact title, level, and interview focus area.", color: "#0369A1" },
+          { icon: <Video size={20} />, step: "03", title: "Live AI interview", desc: "Face-to-face with your AI interviewer. Real questions, real pressure, no second chances.", color: "#9333EA" },
+          { icon: <Award size={20} />, step: "04", title: "Get hired", desc: "Receive a scored, actionable report with a concrete path to your next improvement.", color: "var(--amber)" },
         ].map(({ icon, step, title, desc, color }, i) => (
           <motion.div key={step} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: i * 0.09 }} viewport={{ once: true }}
-            className="card card-lift" style={{ padding: "30px 26px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
-              <div style={{ width: 46, height: 46, borderRadius: 13, background: `${color}14`, border: `1px solid ${color}22`, display: "flex", alignItems: "center", justifyContent: "center", color, transition: "transform 0.22s var(--ease-spring), background 0.22s" }}
+            className="card card-lift" style={{ padding: "28px 24px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 18 }}>
+              <div style={{ width: 44, height: 44, borderRadius: 11, background: `${color}12`, border: `1px solid ${color}20`, display: "flex", alignItems: "center", justifyContent: "center", color, transition: "transform 0.22s var(--ease-spring), background 0.22s" }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.12) rotate(-4deg)"; e.currentTarget.style.background = `${color}22`; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.background = `${color}14`; }}>
+                onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.background = `${color}12`; }}>
                 {icon}
               </div>
-              <span className="brig" style={{ fontSize: 13, fontWeight: 800, color: "var(--slate-200)", letterSpacing: "0.02em" }}>{step}</span>
+              <span className="brig" style={{ fontSize: 12, fontWeight: 800, color: "var(--slate-200)", letterSpacing: "0.04em" }}>{step}</span>
             </div>
-            <h3 className="brig" style={{ fontSize: 17, fontWeight: 700, color: "var(--slate)", marginBottom: 9, letterSpacing: "-0.02em" }}>{title}</h3>
+            <h3 className="brig" style={{ fontSize: 16.5, fontWeight: 700, color: "var(--slate)", marginBottom: 8, letterSpacing: "-0.025em" }}>{title}</h3>
             <p style={{ fontSize: 13.5, color: "var(--slate-500)", lineHeight: 1.72 }}>{desc}</p>
           </motion.div>
         ))}
@@ -1279,12 +1300,12 @@ const Landing = ({ onNav, onCheckout }) => (
     </section>
 
     {/* FEATURES */}
-    <section id="features-section" style={{ padding: "96px clamp(20px,5vw,60px) 112px", background: "var(--white)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
+    <section id="features-section" style={{ padding: "96px clamp(20px,5vw,60px) 112px", background: "var(--ivory)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 60 }}>
           <Tag color="slate"><Zap size={10} /> Why PlacementDo</Tag>
-          <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, letterSpacing: "-0.035em", color: "var(--slate)", marginTop: 16, lineHeight: 1.06 }}>The unfair advantage</h2>
-          <p style={{ fontSize: 16.5, color: "var(--slate-500)", maxWidth: 540, margin: "14px auto 0", lineHeight: 1.72 }}>Built on the same AI infrastructure used to train Fortune 500 hiring managers.</p>
+          <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, letterSpacing: "-0.04em", color: "var(--slate)", marginTop: 16, lineHeight: 1.04 }}>The unfair advantage</h2>
+          <p style={{ fontSize: 16, color: "var(--slate-500)", maxWidth: 520, margin: "14px auto 0", lineHeight: 1.76 }}>Built on the same AI infrastructure used to train Fortune 500 hiring managers.</p>
         </motion.div>
         <div className="feature-grid stagger">
           {[
@@ -1366,42 +1387,42 @@ const Landing = ({ onNav, onCheckout }) => (
     </section>
 
     {/* PRICING */}
-    <section id="pricing-section" style={{ padding: "108px clamp(20px,5vw,60px)", maxWidth: 1100, margin: "0 auto" }}>
+    <section id="pricing-section" style={{ padding: "104px clamp(20px,5vw,60px)", maxWidth: 1100, margin: "0 auto" }}>
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 60 }}>
         <Tag color="teal">Pricing</Tag>
-        <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, letterSpacing: "-0.035em", color: "var(--slate)", marginTop: 16, lineHeight: 1.06 }}>One interview could change everything</h2>
-        <p style={{ fontSize: 15.5, color: "var(--slate-500)", marginTop: 12, lineHeight: 1.65 }}>No subscriptions. No auto-renewals. Join the waitlist for early-bird pricing.</p>
+        <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, letterSpacing: "-0.04em", color: "var(--slate)", marginTop: 16, lineHeight: 1.04 }}>One interview could change everything</h2>
+        <p style={{ fontSize: 15.5, color: "var(--slate-500)", marginTop: 12, lineHeight: 1.68 }}>No subscriptions. No auto-renewals. Join the waitlist for early-bird pricing.</p>
       </motion.div>
       <div className="pricing-grid stagger">
         {PLANS.map(({ name, price, old, hi, tagline, features }, i) => (
           <motion.div key={name} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }}
             className={`pricing-card ${hi ? "hi" : ""}`}
-            style={{ background: hi ? "var(--slate)" : "var(--white)", border: hi ? "1px solid rgba(255,255,255,.08)" : "1px solid var(--border)", boxShadow: hi ? "0 24px 64px rgba(12,17,23,.28), 0 6px 20px rgba(12,17,23,.18)" : "var(--shadow-sm)" }}>
-            {hi && <div style={{ position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)", background: "linear-gradient(135deg,var(--teal-mid),var(--teal-dark))", color: "#fff", fontSize: 10.5, fontWeight: 700, padding: "4px 18px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.08em", boxShadow: "var(--shadow-teal)" }}>MOST POPULAR</div>}
-            <div style={{ fontSize: 10.5, fontWeight: 800, color: hi ? "rgba(255,255,255,.35)" : "var(--slate-400)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 5 }}>{name}</div>
-            <div style={{ fontSize: 12.5, color: hi ? "rgba(255,255,255,.5)" : "var(--slate-500)", marginBottom: 20 }}>{tagline}</div>
+            style={{ background: hi ? "var(--slate)" : "var(--white)", border: hi ? "1px solid rgba(255,255,255,.08)" : "1px solid var(--border)", boxShadow: hi ? "0 24px 64px rgba(11,14,20,.30), 0 6px 20px rgba(11,14,20,.16)" : "var(--shadow-sm)" }}>
+            {hi && <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "var(--teal-dark)", color: "#fff", fontSize: 10, fontWeight: 700, padding: "4px 16px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.1em", boxShadow: "var(--shadow-teal)" }}>MOST POPULAR</div>}
+            <div style={{ fontSize: 10, fontWeight: 800, color: hi ? "rgba(255,255,255,.3)" : "var(--slate-400)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 5 }}>{name}</div>
+            <div style={{ fontSize: 12.5, color: hi ? "rgba(255,255,255,.45)" : "var(--slate-500)", marginBottom: 20 }}>{tagline}</div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 28 }}>
               <span className="brig" style={{ fontSize: "clamp(34px,4vw,52px)", fontWeight: 800, color: hi ? "#fff" : "var(--slate)", letterSpacing: "-0.04em" }}>{price}</span>
-              {old && <span style={{ fontSize: 17, color: hi ? "rgba(255,255,255,.28)" : "var(--slate-300)", textDecoration: "line-through" }}>{old}</span>}
+              {old && <span style={{ fontSize: 17, color: hi ? "rgba(255,255,255,.24)" : "var(--slate-300)", textDecoration: "line-through" }}>{old}</span>}
             </div>
-            <div style={{ height: 1, background: hi ? "rgba(255,255,255,.08)" : "var(--border)", marginBottom: 24 }} />
-            <div style={{ marginBottom: 28 }}>
+            <div style={{ height: 1, background: hi ? "rgba(255,255,255,.07)" : "var(--border)", marginBottom: 22 }} />
+            <div style={{ marginBottom: 26 }}>
               {features.map(f => (
-                <div key={f} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 11 }}>
-                  <div style={{ width: 18, height: 18, borderRadius: "50%", background: hi ? "rgba(13,148,136,.25)" : "var(--teal-light)", border: hi ? "1px solid rgba(13,148,136,.35)" : "1px solid rgba(13,148,136,.2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
-                    <Check size={9} style={{ color: hi ? "var(--teal-mid)" : "var(--teal)" }} strokeWidth={3} />
+                <div key={f} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 10 }}>
+                  <div style={{ width: 17, height: 17, borderRadius: "50%", background: hi ? "rgba(13,148,136,.22)" : "var(--teal-light)", border: hi ? "1px solid rgba(13,148,136,.32)" : "1px solid rgba(13,148,136,.18)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
+                    <Check size={8} style={{ color: hi ? "var(--teal-mid)" : "var(--teal)" }} strokeWidth={3} />
                   </div>
-                  <span style={{ fontSize: 13.5, color: hi ? "rgba(255,255,255,.72)" : "var(--slate-700)", lineHeight: 1.55 }}>{f}</span>
+                  <span style={{ fontSize: 13.5, color: hi ? "rgba(255,255,255,.70)" : "var(--slate-700)", lineHeight: 1.55 }}>{f}</span>
                 </div>
               ))}
             </div>
             <button onClick={() => onCheckout(name)}
-              style={{ width: "100%", padding: "13px", borderRadius: 12, border: "none", background: hi ? "linear-gradient(145deg,var(--teal-mid),var(--teal-dark))" : "var(--slate-100)", color: hi ? "#fff" : "var(--slate)", fontFamily: "'DM Sans',sans-serif", fontWeight: 600, fontSize: 14, cursor: "pointer", transition: "all 0.22s", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, boxShadow: hi ? "0 2px 8px rgba(13,148,136,.25)" : "none" }}
-              onMouseEnter={e => { e.currentTarget.style.background = hi ? "linear-gradient(145deg,var(--teal),var(--teal-dark))" : "var(--slate-200)"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = hi ? "var(--shadow-teal)" : "var(--shadow-sm)"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = hi ? "var(--teal)" : "var(--slate-100)"; e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}
+              style={{ width: "100%", padding: "12px", borderRadius: 10, border: hi ? "1px solid rgba(255,255,255,.08)" : "1px solid var(--border)", background: hi ? "rgba(13,148,136,.18)" : "var(--slate-100)", color: hi ? "var(--teal-mid)" : "var(--slate)", fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 600, fontSize: 13.5, cursor: "pointer", transition: "all 0.22s", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}
+              onMouseEnter={e => { e.currentTarget.style.background = hi ? "var(--teal-dark)" : "var(--slate)"; e.currentTarget.style.color = "#fff"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = hi ? "var(--shadow-teal)" : "var(--shadow-md)"; e.currentTarget.style.border = hi ? "1px solid rgba(255,255,255,.12)" : "1px solid var(--slate)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = hi ? "rgba(13,148,136,.18)" : "var(--slate-100)"; e.currentTarget.style.color = hi ? "var(--teal-mid)" : "var(--slate)"; e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; e.currentTarget.style.border = hi ? "1px solid rgba(255,255,255,.08)" : "1px solid var(--border)"; }}
               onMouseDown={e => e.currentTarget.style.transform = "scale(0.97)"}
               onMouseUp={e => e.currentTarget.style.transform = "translateY(-1px)"}>
-              <CreditCard size={15} /> Get {name} Plan
+              <CreditCard size={14} /> Get {name} Plan
             </button>
           </motion.div>
         ))}
@@ -1423,15 +1444,15 @@ const Landing = ({ onNav, onCheckout }) => (
           <div style={{ maxWidth: 780, margin: "0 auto" }}>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 56 }}>
               <Tag color="slate"><HelpCircle size={10} /> FAQ</Tag>
-              <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, letterSpacing: "-0.035em", color: "var(--slate)", marginTop: 16, lineHeight: 1.06 }}>Common questions</h2>
+              <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, letterSpacing: "-0.04em", color: "var(--slate)", marginTop: 16, lineHeight: 1.04 }}>Common questions</h2>
             </motion.div>
             <div className="card" style={{ overflow: "hidden" }}>
               {FAQS.map(({ q, a }, i) => (
                 <div key={i} className="faq-item">
                   <button className="faq-btn" onClick={() => setOpen(o => o === i ? null : i)} style={{ padding: "20px 24px" }}>
-                    <span className="brig" style={{ fontSize: 15.5, fontWeight: 700, color: "var(--slate)", letterSpacing: "-0.01em", lineHeight: 1.3 }}>{q}</span>
+                    <span className="brig" style={{ fontSize: 15, fontWeight: 700, color: "var(--slate)", letterSpacing: "-0.015em", lineHeight: 1.3 }}>{q}</span>
                     <span className="faq-chevron" style={{ transform: open === i ? "rotate(180deg)" : "rotate(0deg)" }}>
-                      <ChevronDown size={18} />
+                      <ChevronDown size={16} />
                     </span>
                   </button>
                   <AnimatePresence initial={false}>
@@ -1441,8 +1462,8 @@ const Landing = ({ onNav, onCheckout }) => (
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}>
-                        <p style={{ fontSize: 14.5, color: "var(--slate-600)", lineHeight: 1.75, padding: "0 24px 22px", borderTop: "1px solid var(--border)" }}>{a}</p>
+                        transition={{ duration: 0.26, ease: [0.25, 0.1, 0.25, 1] }}>
+                        <p style={{ fontSize: 14, color: "var(--slate-600)", lineHeight: 1.78, padding: "0 24px 20px", borderTop: "1px solid var(--border)" }}>{a}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -1456,10 +1477,9 @@ const Landing = ({ onNav, onCheckout }) => (
 
     {/* WAITLIST CTA */}
     <section id="waitlist-section" style={{ padding: "96px clamp(20px,5vw,60px) 112px", background: "var(--slate)", position: "relative", overflow: "hidden" }}>
-      {/* Premium layered background (no garish gradients) */}
-      <div style={{ position:"absolute", top:"10%", left:"5%", width:500, height:500, background:"radial-gradient(circle,rgba(13,148,136,.12) 0%,transparent 70%)", pointerEvents:"none", animation:"float-anim 10s ease-in-out infinite" }}/>
-      <div style={{ position:"absolute", bottom:"5%", right:"5%", width:400, height:400, background:"radial-gradient(circle,rgba(13,148,136,.08) 0%,transparent 70%)", pointerEvents:"none", animation:"float-anim 12s ease-in-out infinite reverse" }}/>
-      <div style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", width:900, height:600, background:"radial-gradient(ellipse,rgba(13,148,136,.16) 0%,transparent 65%)", pointerEvents:"none" }}/>
+      {/* Refined dark section background — no garish AI gradients */}
+      <div style={{ position:"absolute", inset:0, backgroundImage:"linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px)", backgroundSize:"80px 80px", pointerEvents:"none", maskImage:"radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)" }}/>
+      <div style={{ position:"absolute", top:"5%", left:"50%", transform:"translateX(-50%)", width:900, height:600, background:"radial-gradient(ellipse,rgba(13,148,136,.10) 0%,transparent 65%)", pointerEvents:"none" }}/>
 
       <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} viewport={{ once: true }}
         style={{ position: "relative", zIndex: 1, maxWidth: 660, margin: "0 auto" }}>
@@ -1467,41 +1487,41 @@ const Landing = ({ onNav, onCheckout }) => (
         {/* Top-center icon */}
         <div style={{ textAlign: "center", marginBottom: 28 }}>
           <motion.div whileHover={{ scale: 1.1, rotate: 8 }} transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            style={{ width: 64, height: 64, borderRadius: 18, background: "rgba(13,148,136,.2)", border: "1px solid rgba(13,148,136,.35)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
-            <Bell size={28} style={{ color: "var(--teal-mid)" }} />
+            style={{ width: 60, height: 60, borderRadius: 16, background: "rgba(13,148,136,.15)", border: "1px solid rgba(13,148,136,.28)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+            <Bell size={26} style={{ color: "var(--teal-mid)" }} />
           </motion.div>
           <Tag color="teal"><Sparkles size={11} /> Be First. Get Early Access.</Tag>
-          <h2 className="brig" style={{ fontSize: "clamp(26px,5vw,54px)", fontWeight: 800, letterSpacing: "-0.035em", color: "#fff", marginTop: 20, marginBottom: 14, lineHeight: 1.05 }}>
+          <h2 className="brig" style={{ fontSize: "clamp(26px,5vw,54px)", fontWeight: 800, letterSpacing: "-0.04em", color: "#fff", marginTop: 20, marginBottom: 14, lineHeight: 1.03 }}>
             Your dream offer is<br />one practice away
           </h2>
-          <p style={{ fontSize: "clamp(14px,2vw,16px)", color: "rgba(255,255,255,.55)", marginBottom: 38, lineHeight: 1.68 }}>
-            Join 2,400+ candidates already on the waitlist. Early members get <strong style={{ color: "rgba(255,255,255,.88)" }}>30% off</strong> at launch.
+          <p style={{ fontSize: "clamp(14px,2vw,16px)", color: "rgba(255,255,255,.48)", marginBottom: 38, lineHeight: 1.70 }}>
+            Join 2,400+ candidates already on the waitlist. Early members get <strong style={{ color: "rgba(255,255,255,.85)" }}>30% off</strong> at launch.
           </p>
         </div>
 
         {/* Email box — elevated card feel */}
-        <div style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.12)", borderRadius: 20, padding: "32px 36px", backdropFilter: "blur(12px)", boxShadow: "0 24px 64px rgba(0,0,0,.3)" }}>
+        <div style={{ background: "rgba(255,255,255,.04)", border: "1px solid rgba(255,255,255,.10)", borderRadius: 18, padding: "30px 34px", backdropFilter: "blur(12px)", boxShadow: "0 20px 56px rgba(0,0,0,.28)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--teal-mid)" }} className="dot-live" />
-            <span style={{ fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,.5)", letterSpacing: "0.07em", textTransform: "uppercase" }}>Secure your spot</span>
+            <div style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--teal-mid)" }} className="dot-live" />
+            <span style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,.42)", letterSpacing: "0.09em", textTransform: "uppercase" }}>Secure your spot</span>
           </div>
           <div style={{ display: "flex", justifyContent: "flex-start" }}><WaitlistForm size="lg" dark={true} /></div>
-          <p style={{ fontSize: 12, color: "rgba(255,255,255,.22)", marginTop: 14, display: "flex", alignItems: "center", gap: 5 }}>
+          <p style={{ fontSize: 12, color: "rgba(255,255,255,.20)", marginTop: 14, display: "flex", alignItems: "center", gap: 5 }}>
             <span>🔒</span> No spam. No credit card. Unsubscribe anytime.
           </p>
         </div>
 
         {/* Trust badges */}
-        <div style={{ display: "flex", gap: 20, justifyContent: "center", marginTop: 36, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 20, justifyContent: "center", marginTop: 34, flexWrap: "wrap" }}>
           {[
-            { icon: <CheckCircle2 size={14} />, label: "Free beta access" },
-            { icon: <CheckCircle2 size={14} />, label: "30% launch discount" },
-            { icon: <CheckCircle2 size={14} />, label: "Priority onboarding" },
+            { icon: <CheckCircle2 size={13} />, label: "Free beta access" },
+            { icon: <CheckCircle2 size={13} />, label: "30% launch discount" },
+            { icon: <CheckCircle2 size={13} />, label: "Priority onboarding" },
           ].map(({ icon, label }, i) => (
             <motion.div key={label} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1, duration: 0.4 }} viewport={{ once: true }}
               style={{ display: "flex", alignItems: "center", gap: 7 }}>
               <span style={{ color: "var(--teal-mid)" }}>{icon}</span>
-              <span style={{ fontSize: 13, color: "rgba(255,255,255,.5)", fontWeight: 500 }}>{label}</span>
+              <span style={{ fontSize: 12.5, color: "rgba(255,255,255,.42)", fontWeight: 500 }}>{label}</span>
             </motion.div>
           ))}
         </div>
@@ -1509,19 +1529,19 @@ const Landing = ({ onNav, onCheckout }) => (
     </section>
 
     {/* FOOTER */}
-    <footer style={{ background: "var(--slate)", borderTop: "1px solid rgba(255,255,255,.05)" }}>
+    <footer style={{ background: "var(--slate-800)", borderTop: "1px solid rgba(255,255,255,.04)" }}>
       <div className="footer-grid">
         {/* Brand column */}
         <div>
           <Logo light />
-          <p style={{ fontSize: 13.5, color: "rgba(255,255,255,.38)", lineHeight: 1.72, marginTop: 16, maxWidth: 280 }}>
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,.32)", lineHeight: 1.74, marginTop: 16, maxWidth: 280 }}>
             A hyper-realistic AI interview simulator that knows your CV, the company, and the exact role. Practice smarter. Land faster.
           </p>
           <div style={{ display: "flex", gap: 8, marginTop: 22 }}>
             {[
-              { icon: <MessageSquare size={15} />, label: "Twitter/X" },
-              { icon: <Hash size={15} />, label: "LinkedIn" },
-              { icon: <Bookmark size={15} />, label: "GitHub" },
+              { icon: <MessageSquare size={14} />, label: "Twitter/X" },
+              { icon: <Hash size={14} />, label: "LinkedIn" },
+              { icon: <Bookmark size={14} />, label: "GitHub" },
             ].map(({ icon, label }) => (
               <div key={label} className="footer-social wiggle" title={label}>{icon}</div>
             ))}
@@ -1530,7 +1550,7 @@ const Landing = ({ onNav, onCheckout }) => (
 
         {/* Product links */}
         <div>
-          <div className="brig" style={{ fontSize: 11, fontWeight: 800, color: "rgba(255,255,255,.28)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 18 }}>Product</div>
+          <div className="brig" style={{ fontSize: 10.5, fontWeight: 800, color: "rgba(255,255,255,.24)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 16 }}>Product</div>
           {["Features", "Pricing", "Personas", "How it works", "Changelog"].map(l => (
             <button key={l} className="footer-link">{l}</button>
           ))}
@@ -1538,7 +1558,7 @@ const Landing = ({ onNav, onCheckout }) => (
 
         {/* Company */}
         <div>
-          <div className="brig" style={{ fontSize: 11, fontWeight: 800, color: "rgba(255,255,255,.28)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 18 }}>Company</div>
+          <div className="brig" style={{ fontSize: 10.5, fontWeight: 800, color: "rgba(255,255,255,.24)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 16 }}>Company</div>
           {["About", "Blog", "Careers", "Privacy Policy", "Terms of Service"].map(l => (
             <button key={l} className="footer-link">{l}</button>
           ))}
@@ -1546,20 +1566,20 @@ const Landing = ({ onNav, onCheckout }) => (
 
         {/* Join waitlist */}
         <div>
-          <div className="brig" style={{ fontSize: 11, fontWeight: 800, color: "rgba(255,255,255,.28)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 18 }}>Get Early Access</div>
-          <p style={{ fontSize: 13, color: "rgba(255,255,255,.38)", lineHeight: 1.68, marginBottom: 14 }}>Join the waitlist and get 30% off at launch in 2026.</p>
+          <div className="brig" style={{ fontSize: 10.5, fontWeight: 800, color: "rgba(255,255,255,.24)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 16 }}>Get Early Access</div>
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,.32)", lineHeight: 1.70, marginBottom: 14 }}>Join the waitlist and get 30% off at launch in 2026.</p>
           <WaitlistForm size="sm" dark={true} />
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div style={{ borderTop: "1px solid rgba(255,255,255,.06)", padding: "18px clamp(20px,5vw,60px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10, maxWidth: 1200, margin: "0 auto" }}>
-        <span style={{ fontSize: 12, color: "rgba(255,255,255,.22)" }}>© 2026 PlacementDo. All rights reserved.</span>
+      <div style={{ borderTop: "1px solid rgba(255,255,255,.04)", padding: "16px clamp(20px,5vw,60px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10, maxWidth: 1200, margin: "0 auto" }}>
+        <span style={{ fontSize: 12, color: "rgba(255,255,255,.18)" }}>© 2026 PlacementDo. All rights reserved.</span>
         <div style={{ display: "flex", gap: 16 }}>
           {["Privacy", "Terms", "Cookies"].map(l => (
-            <button key={l} style={{ fontSize: 12, color: "rgba(255,255,255,.22)", background: "none", border: "none", cursor: "pointer", transition: "color 0.15s", fontFamily: "'DM Sans',sans-serif" }}
-              onMouseEnter={e => e.currentTarget.style.color = "rgba(255,255,255,.6)"}
-              onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,.22)"}>{l}</button>
+            <button key={l} style={{ fontSize: 12, color: "rgba(255,255,255,.20)", background: "none", border: "none", cursor: "pointer", transition: "color 0.15s", fontFamily: "'Plus Jakarta Sans',sans-serif" }}
+              onMouseEnter={e => e.currentTarget.style.color = "rgba(255,255,255,.55)"}
+              onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,.20)"}>{l}</button>
           ))}
         </div>
       </div>
@@ -1961,7 +1981,7 @@ const MyReports = ({ onNav }) => {
                     style={{ position: "absolute", right: 0, top: "calc(100% + 6px)", background: "var(--white)", border: "1.5px solid var(--border)", borderRadius: 12, padding: "6px", zIndex: 50, minWidth: 150, boxShadow: "var(--shadow-lg)" }}>
                     {FILTERS.map(f => (
                       <button key={f} onClick={() => { setFilter(f); setShowFilter(false); }}
-                        style={{ display: "block", width: "100%", textAlign: "left", padding: "8px 14px", borderRadius: 8, border: "none", background: filter === f ? "var(--teal-light)" : "transparent", color: filter === f ? "var(--teal-dark)" : "var(--slate-600)", fontSize: 13, fontWeight: filter === f ? 600 : 400, cursor: "pointer", transition: "all 0.15s", fontFamily: "'DM Sans',sans-serif" }}
+                        style={{ display: "block", width: "100%", textAlign: "left", padding: "8px 14px", borderRadius: 8, border: "none", background: filter === f ? "var(--teal-light)" : "transparent", color: filter === f ? "var(--teal-dark)" : "var(--slate-600)", fontSize: 13, fontWeight: filter === f ? 600 : 400, cursor: "pointer", transition: "all 0.15s", fontFamily: "'Plus Jakarta Sans',sans-serif" }}
                         onMouseEnter={e => { if (filter !== f) e.currentTarget.style.background = "var(--slate-50)"; }}
                         onMouseLeave={e => { if (filter !== f) e.currentTarget.style.background = "transparent"; }}>
                         {f}
@@ -2517,7 +2537,7 @@ const CodePanel = ({ activePersona, qIdx, elapsed }) => {
         <div style={{ padding: "12px 16px", borderBottom: "1px solid rgba(255,255,255,.06)", display: "flex", gap: 8 }}>
           {CODE_QUESTIONS.map((q, i) => (
             <button key={q.id} onClick={() => { setCodeQ(i); setCode(q.starterCode); setOutput(""); setSubmitted(false); }}
-              style={{ flex: 1, padding: "7px 10px", borderRadius: 9, border: `1.5px solid ${codeQ === i ? "var(--teal)" : "rgba(255,255,255,.1)"}`, background: codeQ === i ? "rgba(13,148,136,.18)" : "transparent", color: codeQ === i ? "var(--teal-mid)" : "rgba(255,255,255,.5)", fontSize: 11, fontWeight: 700, cursor: "pointer", transition: "all 0.2s", fontFamily: "'DM Sans',sans-serif" }}>
+              style={{ flex: 1, padding: "7px 10px", borderRadius: 9, border: `1.5px solid ${codeQ === i ? "var(--teal)" : "rgba(255,255,255,.1)"}`, background: codeQ === i ? "rgba(13,148,136,.18)" : "transparent", color: codeQ === i ? "var(--teal-mid)" : "rgba(255,255,255,.5)", fontSize: 11, fontWeight: 700, cursor: "pointer", transition: "all 0.2s", fontFamily: "'Plus Jakarta Sans',sans-serif" }}>
               Q{q.id}: {q.title}
             </button>
           ))}
@@ -2531,7 +2551,7 @@ const CodePanel = ({ activePersona, qIdx, elapsed }) => {
           <div style={{ display: "flex", gap: 5, marginBottom: 14 }}>
             {cq.tags.map(t => <span key={t} style={{ fontSize: 10, background: "rgba(255,255,255,.07)", color: "rgba(255,255,255,.5)", borderRadius: 5, padding: "2px 7px" }}>{t}</span>)}
           </div>
-          <pre style={{ fontSize: 12, color: "rgba(255,255,255,.65)", lineHeight: 1.7, whiteSpace: "pre-wrap", fontFamily: "'DM Sans',sans-serif" }}>{cq.prompt}</pre>
+          <pre style={{ fontSize: 12, color: "rgba(255,255,255,.65)", lineHeight: 1.7, whiteSpace: "pre-wrap", fontFamily: "'Plus Jakarta Sans',sans-serif" }}>{cq.prompt}</pre>
           {/* Hint */}
           <div style={{ marginTop: 16, background: "rgba(13,148,136,.1)", border: "1px solid rgba(13,148,136,.2)", borderRadius: 10, padding: "10px 12px" }}>
             <div style={{ fontSize: 10, fontWeight: 700, color: "var(--teal-mid)", letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: 5 }}>💡 Hint</div>
@@ -2540,7 +2560,7 @@ const CodePanel = ({ activePersona, qIdx, elapsed }) => {
           {/* Interviewer sees this */}
           <div style={{ marginTop: 16 }}>
             <button onClick={() => setShowInterviewerView(v => !v)}
-              style={{ width: "100%", padding: "9px 12px", borderRadius: 10, border: "1px solid rgba(255,255,255,.1)", background: "rgba(255,255,255,.04)", color: "rgba(255,255,255,.5)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: "'DM Sans',sans-serif", transition: "all 0.2s" }}
+              style={{ width: "100%", padding: "9px 12px", borderRadius: 10, border: "1px solid rgba(255,255,255,.1)", background: "rgba(255,255,255,.04)", color: "rgba(255,255,255,.5)", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: "'Plus Jakarta Sans',sans-serif", transition: "all 0.2s" }}
               onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,.08)"}
               onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,.04)"}>
               <span>👀 Interviewer View</span>
@@ -2578,7 +2598,7 @@ const CodePanel = ({ activePersona, qIdx, elapsed }) => {
           <div style={{ display:"flex", gap:5 }}>
             {LANGS.map(l => (
               <button key={l} onClick={() => handleLangChange(l)}
-                style={{ padding: "5px 10px", borderRadius: 7, border: `1.5px solid ${lang === l ? LANG_COLORS[l] : "rgba(255,255,255,.1)"}`, background: lang === l ? `${LANG_COLORS[l]}22` : "transparent", color: lang === l ? LANG_COLORS[l] : "rgba(255,255,255,.4)", fontSize: 11, fontWeight: 700, cursor: "pointer", transition: "all 0.2s", fontFamily: "'DM Sans',sans-serif" }}>
+                style={{ padding: "5px 10px", borderRadius: 7, border: `1.5px solid ${lang === l ? LANG_COLORS[l] : "rgba(255,255,255,.1)"}`, background: lang === l ? `${LANG_COLORS[l]}22` : "transparent", color: lang === l ? LANG_COLORS[l] : "rgba(255,255,255,.4)", fontSize: 11, fontWeight: 700, cursor: "pointer", transition: "all 0.2s", fontFamily: "'Plus Jakarta Sans',sans-serif" }}>
                 {l}
               </button>
             ))}
@@ -2586,13 +2606,13 @@ const CodePanel = ({ activePersona, qIdx, elapsed }) => {
           <div style={{ flex: 1 }} />
           <span style={{ fontSize: 10, color: "rgba(255,255,255,.25)", fontFamily: "monospace" }}>{lineCount} lines</span>
           <button onClick={runCode} disabled={running}
-            style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 8, border: "none", background: running ? "rgba(255,255,255,.1)" : "rgba(13,148,136,.85)", color: "#fff", fontSize: 12, fontWeight: 700, cursor: running ? "not-allowed" : "pointer", transition: "all 0.2s", fontFamily: "'DM Sans',sans-serif" }}
+            style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 8, border: "none", background: running ? "rgba(255,255,255,.1)" : "rgba(13,148,136,.85)", color: "#fff", fontSize: 12, fontWeight: 700, cursor: running ? "not-allowed" : "pointer", transition: "all 0.2s", fontFamily: "'Plus Jakarta Sans',sans-serif" }}
             onMouseEnter={e => !running && (e.currentTarget.style.background = "rgba(13,148,136,1)")}
             onMouseLeave={e => !running && (e.currentTarget.style.background = "rgba(13,148,136,.85)")}>
             {running ? <><span className="spin"><RefreshCw size={12} /></span> Running…</> : "▶ Run Code"}
           </button>
           <button onClick={submitCode} disabled={running || submitted}
-            style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 8, border: "none", background: submitted ? "rgba(22,163,74,.3)" : running ? "rgba(255,255,255,.05)" : "rgba(22,163,74,.85)", color: submitted ? "#86EFAC" : "#fff", fontSize: 12, fontWeight: 700, cursor: (running || submitted) ? "not-allowed" : "pointer", transition: "all 0.2s", fontFamily: "'DM Sans',sans-serif" }}>
+            style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 8, border: "none", background: submitted ? "rgba(22,163,74,.3)" : running ? "rgba(255,255,255,.05)" : "rgba(22,163,74,.85)", color: submitted ? "#86EFAC" : "#fff", fontSize: 12, fontWeight: 700, cursor: (running || submitted) ? "not-allowed" : "pointer", transition: "all 0.2s", fontFamily: "'Plus Jakarta Sans',sans-serif" }}>
             {submitted ? <><Check size={12} /> Submitted</> : "Submit"}
           </button>
         </div>
@@ -2700,7 +2720,7 @@ const InterviewLoading = ({ persona, onReady }) => {
           <motion.div key={i} initial={{ opacity: 0, x: -14 }} animate={{ opacity: i <= step ? 1 : 0.22, x: 0 }} transition={{ delay: i * 0.12, duration: 0.38 }}
             style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 18px", borderRadius: 12, background: i === step ? "rgba(13,148,136,.15)" : "rgba(255,255,255,.03)", border: `1px solid ${i === step ? "rgba(13,148,136,.35)" : "rgba(255,255,255,.05)"}`, transition: "all 0.3s" }}>
             <span style={{ fontSize: 16 }}>{s.icon}</span>
-            <span style={{ fontSize: 13.5, color: i < step ? "rgba(255,255,255,.5)" : i === step ? "rgba(255,255,255,.9)" : "rgba(255,255,255,.25)", fontWeight: i === step ? 600 : 400, fontFamily: "'DM Sans',sans-serif", flex: 1 }}>
+            <span style={{ fontSize: 13.5, color: i < step ? "rgba(255,255,255,.5)" : i === step ? "rgba(255,255,255,.9)" : "rgba(255,255,255,.25)", fontWeight: i === step ? 600 : 400, fontFamily: "'Plus Jakarta Sans',sans-serif", flex: 1 }}>
               {s.label}{i === step ? dots : ""}
             </span>
             {i < step && <Check size={14} color="var(--teal-mid)" strokeWidth={3} />}
@@ -2827,7 +2847,7 @@ const InterviewRoom = ({ onNav, persona }) => {
         <div style={{ display:"flex", gap:2, background:"rgba(255,255,255,.06)", borderRadius:9, padding:3, border:"1px solid rgba(255,255,255,.08)", flexShrink:0 }}>
           {[{ id:"interview", label:"Interview", icon:"🎙️" },{ id:"code", label:"Code", icon:"⌨️" }].map(tab => (
             <button key={tab.id} onClick={()=>setRoomTab(tab.id)}
-              style={{ display:"flex", alignItems:"center", gap:5, padding:"5px 11px", borderRadius:7, border:"none", background:roomTab===tab.id?"rgba(13,148,136,.85)":"transparent", color:roomTab===tab.id?"#fff":"rgba(255,255,255,.4)", fontSize:11.5, fontWeight:700, cursor:"pointer", transition:"all 0.2s", fontFamily:"'DM Sans',sans-serif", whiteSpace:"nowrap", lineHeight:1 }}>
+              style={{ display:"flex", alignItems:"center", gap:5, padding:"5px 11px", borderRadius:7, border:"none", background:roomTab===tab.id?"rgba(13,148,136,.85)":"transparent", color:roomTab===tab.id?"#fff":"rgba(255,255,255,.4)", fontSize:11.5, fontWeight:700, cursor:"pointer", transition:"all 0.2s", fontFamily:"'Plus Jakarta Sans',sans-serif", whiteSpace:"nowrap", lineHeight:1 }}>
               <span style={{ fontSize:12 }}>{tab.icon}</span> <span className="int-tab-label">{tab.label}</span>
             </button>
           ))}
@@ -3102,12 +3122,12 @@ const InterviewRoom = ({ onNav, persona }) => {
         {/* Next / End */}
         {qIdx < QUESTIONS.length - 1 ? (
           <button onClick={() => setQIdx(q => q + 1)}
-            style={{ flex: 2, height: 50, borderRadius: 14, border: "none", background: "var(--teal)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, color: "#fff", fontWeight: 700, fontSize: 13, fontFamily: "'DM Sans',sans-serif", transition: "all 0.2s" }}>
+            style={{ flex: 2, height: 50, borderRadius: 14, border: "none", background: "var(--teal)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, color: "#fff", fontWeight: 700, fontSize: 13, fontFamily: "'Plus Jakarta Sans',sans-serif", transition: "all 0.2s" }}>
             Next <ChevronRight size={16} />
           </button>
         ) : (
           <button onClick={() => setEnding(true)}
-            style={{ flex: 2, height: 50, borderRadius: 14, border: "none", background: "rgba(220,38,38,.18)", borderWidth: 1, borderStyle: "solid", borderColor: "rgba(220,38,38,.4)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, color: "#FC8181", fontWeight: 700, fontSize: 13, fontFamily: "'DM Sans',sans-serif", transition: "all 0.2s" }}>
+            style={{ flex: 2, height: 50, borderRadius: 14, border: "none", background: "rgba(220,38,38,.18)", borderWidth: 1, borderStyle: "solid", borderColor: "rgba(220,38,38,.4)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, color: "#FC8181", fontWeight: 700, fontSize: 13, fontFamily: "'Plus Jakarta Sans',sans-serif", transition: "all 0.2s" }}>
             <PhoneOff size={16} /> End & Report
           </button>
         )}
@@ -3312,7 +3332,7 @@ const Report = ({ onNav }) => {
                       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "var(--shadow-md)"; }}
                       onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = ""; }}>
                       <span style={{ fontSize: 22 }}>{icon}</span>
-                      <span style={{ fontSize: 12, fontWeight: 700, color, fontFamily: "'DM Sans',sans-serif" }}>{label}</span>
+                      <span style={{ fontSize: 12, fontWeight: 700, color, fontFamily: "'Plus Jakarta Sans',sans-serif" }}>{label}</span>
                       <span style={{ fontSize: 10, color: "var(--slate-500)", textAlign: "center", lineHeight: 1.4 }}>{hint}</span>
                     </button>
                   ))}
@@ -3494,7 +3514,7 @@ const SupportView = () => {
                   <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 2 }}>
                     {["Bug Report", "Improvement Idea", "General Question"].map(c => (
                       <button type="button" key={c} onClick={() => setFbCategory(c)}
-                        style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 13px", borderRadius: 20, fontSize: 13, fontWeight: 500, cursor: "pointer", transition: "all 0.18s", fontFamily: "'DM Sans',sans-serif", border: `1.5px solid ${fbCategory === c ? "var(--teal)" : "var(--border)"}`, background: fbCategory === c ? "var(--teal-light)" : "var(--white)", color: fbCategory === c ? "var(--teal-dark)" : "var(--slate-600)" }}>
+                        style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 13px", borderRadius: 20, fontSize: 13, fontWeight: 500, cursor: "pointer", transition: "all 0.18s", fontFamily: "'Plus Jakarta Sans',sans-serif", border: `1.5px solid ${fbCategory === c ? "var(--teal)" : "var(--border)"}`, background: fbCategory === c ? "var(--teal-light)" : "var(--white)", color: fbCategory === c ? "var(--teal-dark)" : "var(--slate-600)" }}>
                         <span>{CAT_ICONS[c]}</span>{c}
                       </button>
                     ))}
@@ -3594,7 +3614,7 @@ const SupportView = () => {
             <div style={{ padding: "8px 16px", background: "var(--ivory)", borderTop: "1px solid var(--border)", display: "flex", gap: 7, flexWrap: "wrap" }}>
               {["How does scoring work?", "Best persona to start with?", "How to use STAR method?"].map(q => (
                 <button key={q} onClick={() => { setChatInput(q); }}
-                  style={{ fontSize: 11.5, padding: "5px 11px", borderRadius: 14, border: "1px solid var(--border)", background: "var(--white)", color: "var(--slate-600)", cursor: "pointer", fontFamily: "'DM Sans',sans-serif", transition: "all 0.18s", whiteSpace: "nowrap" }}
+                  style={{ fontSize: 11.5, padding: "5px 11px", borderRadius: 14, border: "1px solid var(--border)", background: "var(--white)", color: "var(--slate-600)", cursor: "pointer", fontFamily: "'Plus Jakarta Sans',sans-serif", transition: "all 0.18s", whiteSpace: "nowrap" }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--teal)"; e.currentTarget.style.color = "var(--teal-dark)"; e.currentTarget.style.background = "var(--teal-light)"; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.color = "var(--slate-600)"; e.currentTarget.style.background = "var(--white)"; }}>
                   {q}
