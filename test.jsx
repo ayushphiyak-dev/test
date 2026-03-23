@@ -11,6 +11,12 @@ import {
   ChevronDown, ChevronUp, Calendar, Hash, Bookmark,
   LifeBuoy, Send, Bot
 } from "lucide-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Draggable } from "gsap/Draggable";
+
+gsap.registerPlugin(ScrollTrigger, Draggable, useGSAP);
 
 const G = () => (
   <style>{`
@@ -519,6 +525,188 @@ const G = () => (
     .mth-fill { width:100%; border-radius:6px; transition:filter 0.2s, transform 0.2s, box-shadow 0.2s; }
   `}</style>
 );
+
+/* ─────────────────────────────────────────────
+   GSAP SCROLL-REVEAL WRAPPER
+   Wraps any children and animates them into view
+   using ScrollTrigger when they enter the viewport.
+───────────────────────────────────────────── */
+const GSAPReveal = ({ children, delay = 0, fromY = 40, style = {}, className = "" }) => {
+  const el = useRef(null);
+  useGSAP(() => {
+    if (!el.current) return;
+    gsap.fromTo(
+      el.current,
+      { opacity: 0, y: fromY },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.75,
+        delay,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el.current,
+          start: "top 88%",
+          once: true,
+        },
+      }
+    );
+  }, { scope: el });
+  return (
+    <div ref={el} style={{ opacity: 0, ...style }} className={className}>
+      {children}
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   GSAP FLOATING BLOBS — decorative background
+   shapes inspired by GSAP.com's visual style.
+───────────────────────────────────────────── */
+const FloatingBlobs = () => {
+  const container = useRef(null);
+  useGSAP(() => {
+    const blobs = container.current?.querySelectorAll(".gsap-blob");
+    if (!blobs?.length) return;
+    blobs.forEach((blob, i) => {
+      gsap.to(blob, {
+        y: `${(i % 2 === 0 ? -1 : 1) * (18 + i * 6)}px`,
+        x: `${(i % 3 === 0 ? 1 : -1) * (10 + i * 4)}px`,
+        rotation: (i % 2 === 0 ? 1 : -1) * 8,
+        duration: 6 + i * 1.5,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
+    });
+  }, { scope: container });
+  return (
+    <div ref={container} aria-hidden="true" style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden", zIndex: 0 }}>
+      {/* Large violet blob top-left */}
+      <div className="gsap-blob" style={{
+        position: "absolute", top: "5%", left: "-8%",
+        width: 520, height: 520,
+        background: "radial-gradient(circle at 40% 40%, rgba(139,92,246,0.22) 0%, rgba(139,92,246,0.06) 50%, transparent 70%)",
+        borderRadius: "60% 40% 70% 30% / 50% 60% 40% 50%",
+        filter: "blur(40px)",
+      }} />
+      {/* Pink blob top-right */}
+      <div className="gsap-blob" style={{
+        position: "absolute", top: "8%", right: "-6%",
+        width: 440, height: 380,
+        background: "radial-gradient(circle at 60% 35%, rgba(217,70,239,0.18) 0%, rgba(217,70,239,0.05) 50%, transparent 70%)",
+        borderRadius: "40% 60% 30% 70% / 60% 40% 70% 30%",
+        filter: "blur(35px)",
+      }} />
+      {/* Cyan accent blob bottom-center */}
+      <div className="gsap-blob" style={{
+        position: "absolute", bottom: "12%", left: "30%",
+        width: 360, height: 300,
+        background: "radial-gradient(circle at 50% 50%, rgba(34,211,238,0.14) 0%, rgba(34,211,238,0.04) 55%, transparent 70%)",
+        borderRadius: "70% 30% 50% 50% / 40% 60% 40% 60%",
+        filter: "blur(30px)",
+      }} />
+      {/* Small green accent bottom-left */}
+      <div className="gsap-blob" style={{
+        position: "absolute", bottom: "5%", left: "5%",
+        width: 240, height: 200,
+        background: "radial-gradient(circle, rgba(74,222,128,0.12) 0%, transparent 65%)",
+        borderRadius: "50% 50% 60% 40% / 50% 40% 60% 50%",
+        filter: "blur(24px)",
+      }} />
+      {/* Abstract violet polygon top-center */}
+      <svg style={{ position: "absolute", top: "3%", left: "42%", opacity: 0.12 }} width="180" height="180" viewBox="0 0 180 180" fill="none">
+        <polygon points="90,10 168,50 168,130 90,170 12,130 12,50" stroke="#8B5CF6" strokeWidth="1.5" fill="rgba(139,92,246,0.08)" />
+        <polygon points="90,30 148,62 148,118 90,150 32,118 32,62" stroke="#D946EF" strokeWidth="1" fill="none" />
+      </svg>
+      {/* Abstract grid dots right side */}
+      <svg style={{ position: "absolute", top: "20%", right: "4%", opacity: 0.15 }} width="140" height="140" viewBox="0 0 140 140" fill="none">
+        {[0,1,2,3,4,5,6].map(row => [0,1,2,3,4,5,6].map(col => (
+          <circle key={`${row}-${col}`} cx={10 + col * 20} cy={10 + row * 20} r="2" fill="#8B5CF6" />
+        )))}
+      </svg>
+      {/* Small cross accent bottom-right */}
+      <svg style={{ position: "absolute", bottom: "18%", right: "8%", opacity: 0.2 }} width="60" height="60" viewBox="0 0 60 60" fill="none">
+        <line x1="30" y1="0" x2="30" y2="60" stroke="#22D3EE" strokeWidth="2" />
+        <line x1="0" y1="30" x2="60" y2="30" stroke="#22D3EE" strokeWidth="2" />
+        <circle cx="30" cy="30" r="4" fill="#22D3EE" />
+      </svg>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   GSAP DRAGGABLE BADGE — interactive element
+   that users can drag around using GSAP Draggable.
+───────────────────────────────────────────── */
+const DraggableBadge = () => {
+  const badgeRef = useRef(null);
+  useGSAP(() => {
+    if (!badgeRef.current) return;
+    Draggable.create(badgeRef.current, {
+      type: "x,y",
+      edgeResistance: 0.65,
+      inertia: true,
+      onPress() { gsap.to(badgeRef.current, { scale: 1.15, duration: 0.2, ease: "power2.out" }); },
+      onRelease() { gsap.to(badgeRef.current, { scale: 1, duration: 0.4, ease: "elastic.out(1,0.5)" }); },
+    });
+    // Subtle idle float
+    gsap.to(badgeRef.current, { y: -8, duration: 2.5, ease: "sine.inOut", yoyo: true, repeat: -1 });
+  });
+  return (
+    <div ref={badgeRef} title="Drag me!" style={{
+      position: "absolute", top: "clamp(120px, 18%, 160px)", right: "clamp(20px, 8%, 80px)",
+      background: "linear-gradient(135deg, rgba(139,92,246,0.25), rgba(217,70,239,0.18))",
+      backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)",
+      border: "1px solid rgba(139,92,246,0.4)",
+      borderRadius: 16, padding: "10px 18px",
+      display: "flex", alignItems: "center", gap: 8,
+      cursor: "grab", userSelect: "none", zIndex: 10,
+      boxShadow: "0 8px 32px rgba(139,92,246,0.3), 0 0 0 1px rgba(255,255,255,0.05)",
+    }}>
+      <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ADE80", boxShadow: "0 0 8px #4ADE80", animation: "dot-pulse 2s ease-in-out infinite" }} />
+      <span style={{ fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,0.9)", fontFamily: "'Space Grotesk',sans-serif", letterSpacing: "0.02em" }}>AI Live · Drag me</span>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   GSAP ANIMATED STAT — counts up to a target
+   number when scrolled into view.
+───────────────────────────────────────────── */
+const GSAPStatCounter = ({ value, label }) => {
+  const numRef = useRef(null);
+  // Parse numeric part and suffix (e.g. "2,400+" → num=2400, suffix="+")
+  const raw = value.replace(/,/g, "");
+  const numeric = parseFloat(raw);
+  const suffix = isNaN(numeric) ? "" : raw.replace(String(Math.floor(numeric)), "");
+
+  useGSAP(() => {
+    if (!numRef.current || isNaN(numeric)) return;
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: numeric,
+      duration: 1.8,
+      ease: "power2.out",
+      scrollTrigger: { trigger: numRef.current, start: "top 90%", once: true },
+      onUpdate() {
+        if (numRef.current) {
+          const v = Math.round(obj.val);
+          numRef.current.textContent = v.toLocaleString() + suffix;
+        }
+      },
+    });
+  });
+
+  return (
+    <div style={{ textAlign: "center", padding: "0 8px" }}>
+      <div className="brig" style={{ fontSize: "clamp(20px,2.8vw,32px)", fontWeight: 800, color: "var(--slate)", letterSpacing: "-0.04em", lineHeight: 1.1 }}>
+        {isNaN(numeric) ? value : <span ref={numRef}>0{suffix}</span>}
+      </div>
+      <div style={{ fontSize: 11.5, color: "var(--slate-400)", marginTop: 4, fontWeight: 500 }}>{label}</div>
+    </div>
+  );
+};
 
 const COMPANIES = [
   { name: "Google", abbr: "G", bg: "#E8F0FE", fg: "#1A73E8" },
@@ -1237,10 +1425,30 @@ const DashboardShell = ({ activeTab, onNav, onUpgrade, children }) => {
 };
 
 /* ── Landing ── */
-const Landing = ({ onNav, onCheckout }) => (
+const Landing = ({ onNav, onCheckout }) => {
+  const heroRef = useRef(null);
+
+  // GSAP parallax: hero background blobs shift on scroll
+  useGSAP(() => {
+    if (!heroRef.current) return;
+    gsap.to(heroRef.current.querySelectorAll(".gsap-blob"), {
+      yPercent: -25,
+      ease: "none",
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: 1.5,
+      },
+    });
+  }, { scope: heroRef });
+
+  return (
   <div style={{ background: "#030309" }}>
     {/* HERO */}
-    <section className="hero-pad" style={{ minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"100px clamp(20px,5vw,60px) 80px", textAlign:"center", position:"relative", overflow:"hidden" }}>
+    <section ref={heroRef} className="hero-pad" style={{ minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"100px clamp(20px,5vw,60px) 80px", textAlign:"center", position:"relative", overflow:"hidden" }}>
+      {/* GSAP-animated floating blobs and abstract shapes */}
+      <FloatingBlobs />
       {/* Cosmic Neon aurora background */}
       <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 100% 70% at 50% 0%,rgba(139,92,246,0.18) 0%,transparent 60%)", pointerEvents:"none" }}/>
       <div style={{ position:"absolute", top:"-10%", left:"20%", width:600, height:600, background:"radial-gradient(circle,rgba(139,92,246,0.12) 0%,transparent 65%)", pointerEvents:"none", animation:"float-anim 8s ease-in-out infinite" }}/>
@@ -1249,6 +1457,8 @@ const Landing = ({ onNav, onCheckout }) => (
       <div style={{ position:"absolute", bottom:0, left:0, right:0, height:240, background:"linear-gradient(to bottom,transparent,rgba(3,3,9,1))", pointerEvents:"none" }}/>
       {/* Subtle decorative grid lines */}
       <div style={{ position:"absolute", inset:0, backgroundImage:"linear-gradient(rgba(139,92,246,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,0.06) 1px,transparent 1px)", backgroundSize:"72px 72px", pointerEvents:"none", maskImage:"radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%)" }}/>
+      {/* GSAP draggable interactive badge */}
+      <DraggableBadge />
       <motion.div initial={{ opacity:0,y:24 }} animate={{ opacity:1,y:0 }} transition={{ duration:0.5 }}>
         <Tag color="teal"><Sparkles size={11}/> Coming Soon · Join the Waitlist</Tag>
       </motion.div>
@@ -1268,10 +1478,7 @@ const Landing = ({ onNav, onCheckout }) => (
       </motion.div>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }} className="stats-row" style={{ marginTop: 52 }}>
         {[{ n: "2,400+", l: "Waitlist signups" }, { n: "140+", l: "Target companies" }, { n: "28", l: "Languages planned" }, { n: "2026", l: "Launch year" }].map(({ n, l }) => (
-          <div key={l} style={{ textAlign: "center", padding: "0 8px" }}>
-            <div className="brig" style={{ fontSize: "clamp(20px,2.8vw,32px)", fontWeight: 800, color: "var(--slate)", letterSpacing: "-0.04em", lineHeight: 1.1 }}>{n}</div>
-            <div style={{ fontSize: 11.5, color: "var(--slate-400)", marginTop: 4, fontWeight: 500 }}>{l}</div>
-          </div>
+          <GSAPStatCounter key={l} value={n} label={l} />
         ))}
       </motion.div>
       <motion.div initial={{ opacity: 0, y: 48, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.8, delay: 0.52 }}
@@ -1323,6 +1530,7 @@ const Landing = ({ onNav, onCheckout }) => (
     </section>
 
     {/* HOW IT WORKS */}
+    <GSAPReveal fromY={50}>
     <section className="sec-pad" style={{ padding:"104px clamp(20px,5vw,60px)", maxWidth:1100, margin:"0 auto" }}>
       <motion.div initial={{ opacity:0,y:20 }} whileInView={{ opacity:1,y:0 }} transition={{ duration:0.55 }} viewport={{ once:true }} style={{ textAlign:"center", marginBottom:60 }}>
         <Tag color="teal">Process</Tag>
@@ -1351,8 +1559,10 @@ const Landing = ({ onNav, onCheckout }) => (
         ))}
       </div>
     </section>
+    </GSAPReveal>
 
     {/* FEATURES */}
+    <GSAPReveal fromY={50} delay={0.05}>
     <section id="features-section" style={{ padding: "96px clamp(20px,5vw,60px) 112px", background: "var(--ivory)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 60 }}>
@@ -1438,8 +1648,10 @@ const Landing = ({ onNav, onCheckout }) => (
         </motion.div>
       </div>
     </section>
+    </GSAPReveal>
 
     {/* PRICING */}
+    <GSAPReveal fromY={50} delay={0.05}>
     <section id="pricing-section" style={{ padding: "104px clamp(20px,5vw,60px)", maxWidth: 1100, margin: "0 auto" }}>
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 60 }}>
         <Tag color="teal">Pricing</Tag>
@@ -1481,6 +1693,7 @@ const Landing = ({ onNav, onCheckout }) => (
         ))}
       </div>
     </section>
+    </GSAPReveal>
 
     {/* FAQ */}
     {(() => {
@@ -1638,7 +1851,8 @@ const Landing = ({ onNav, onCheckout }) => (
       </div>
     </footer>
   </div>
-);
+  );
+};
 
 /* ── Sign In ── */
 const SignIn = ({ onNav }) => {
