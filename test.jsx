@@ -523,6 +523,11 @@ const G = () => (
     .mth-bar { flex:1; display:flex; flex-direction:column; align-items:center; gap:8px; cursor:default; }
     .mth-bar:hover .mth-fill { filter:brightness(1.3) saturate(1.2); transform: scale(1.05); box-shadow: 0 0 12px rgba(139,92,246,0.4); }
     .mth-fill { width:100%; border-radius:6px; transition:filter 0.2s, transform 0.2s, box-shadow 0.2s; }
+
+    /* ── GSAP performance hints ── */
+    .gsap-blob, .feature-card, .pricing-card { will-change: transform; }
+    .gsap-word { display: inline-block; will-change: transform, opacity; }
+    .gsap-clip-wrap { will-change: clip-path; }
   `}</style>
 );
 
@@ -704,6 +709,126 @@ const GSAPStatCounter = ({ value, label }) => {
         {isNaN(numeric) ? value : <span ref={numRef}>0{suffix}</span>}
       </div>
       <div style={{ fontSize: 11.5, color: "var(--slate-400)", marginTop: 4, fontWeight: 500 }}>{label}</div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   GSAP WORD REVEAL
+   Splits text into individual word spans and
+   animates them in with stagger on scroll —
+   a classic GSAP-style text reveal pattern.
+───────────────────────────────────────────── */
+const GSAPWordReveal = ({ children, className = "", style = {} }) => {
+  const el = useRef(null);
+  const words = (typeof children === "string" ? children : String(children))
+    .split(" ")
+    .filter(Boolean);
+
+  useGSAP(() => {
+    if (!el.current || !words.length) return;
+    gsap.fromTo(
+      el.current.querySelectorAll(".gsap-word"),
+      { y: 52, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.07,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: el.current, start: "top 88%", once: true },
+      }
+    );
+  }, { scope: el });
+
+  return (
+    <div ref={el} className={className} style={style}>
+      {words.map((w, i) => (
+        <span key={`${w}-${i}`} className="gsap-word" style={{ opacity: 0, marginRight: "0.27em" }}>
+          {w}
+        </span>
+      ))}
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   GSAP CLIP-PATH REVEAL
+   Wipes an element into view with a clip-path
+   curtain effect tied to ScrollTrigger.
+───────────────────────────────────────────── */
+const GSAPClipReveal = ({ children, style = {}, className = "" }) => {
+  const el = useRef(null);
+  useGSAP(() => {
+    if (!el.current) return;
+    gsap.fromTo(
+      el.current,
+      { clipPath: "inset(0 100% 0 0)" },
+      {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 0.9,
+        ease: "power3.inOut",
+        scrollTrigger: { trigger: el.current, start: "top 88%", once: true },
+      }
+    );
+  }, { scope: el });
+  return (
+    <div ref={el} className={`gsap-clip-wrap ${className}`} style={{ clipPath: "inset(0 100% 0 0)", ...style }}>
+      {children}
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   GSAP HORIZONTAL SCROLL SECTION
+   Vertical scroll drives the content sideways.
+   Uses pin + scrub — a core GSAP pattern where
+   User Scroll → Animation Timeline → UI State.
+───────────────────────────────────────────── */
+const GSAPHorizontalScroll = ({ children }) => {
+  const wrapperRef = useRef(null);
+  const trackRef = useRef(null);
+
+  useGSAP(() => {
+    const track = trackRef.current;
+    const wrapper = wrapperRef.current;
+    if (!track || !wrapper) return;
+
+    /* Use GSAP matchMedia so the animation adapts when the viewport
+       is resized — horizontal scroll only on tablet/desktop widths. */
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      gsap.to(track, {
+        x: () => -(track.scrollWidth - window.innerWidth),
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top top",
+          end: () => `+=${track.scrollWidth - window.innerWidth}`,
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        },
+      });
+    });
+  }, { scope: wrapperRef });
+
+  return (
+    <div ref={wrapperRef} className="gsap-hscroll-wrap" style={{ overflow: "hidden", position: "relative" }}>
+      <div ref={trackRef} style={{
+        display: "flex",
+        gap: 24,
+        paddingLeft: "clamp(20px,5vw,60px)",
+        paddingRight: "clamp(20px,5vw,60px)",
+        paddingBottom: 48,
+        willChange: "transform",
+        alignItems: "stretch",
+      }}>
+        {children}
+      </div>
+      {/* Mobile: allow native horizontal swipe */}
+      <style>{`@media(max-width:767px){.gsap-hscroll-wrap{overflow-x:auto !important;-webkit-overflow-scrolling:touch;}}`}</style>
     </div>
   );
 };
@@ -1532,10 +1657,14 @@ const Landing = ({ onNav, onCheckout }) => {
     {/* HOW IT WORKS */}
     <GSAPReveal fromY={50}>
     <section className="sec-pad" style={{ padding:"104px clamp(20px,5vw,60px)", maxWidth:1100, margin:"0 auto" }}>
-      <motion.div initial={{ opacity:0,y:20 }} whileInView={{ opacity:1,y:0 }} transition={{ duration:0.55 }} viewport={{ once:true }} style={{ textAlign:"center", marginBottom:60 }}>
-        <Tag color="teal">Process</Tag>
-        <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, color: "var(--slate)", letterSpacing: "-0.04em", marginTop: 16, lineHeight: 1.04 }}>From zero to hired in four steps</h2>
-      </motion.div>
+      <div style={{ textAlign:"center", marginBottom:60 }}>
+        <GSAPReveal delay={0}>
+          <Tag color="teal">Process</Tag>
+        </GSAPReveal>
+        <GSAPWordReveal className="brig" style={{ fontSize:"clamp(26px,4.5vw,52px)", fontWeight:800, color:"var(--slate)", letterSpacing:"-0.04em", marginTop:16, lineHeight:1.04 }}>
+          From zero to hired in four steps
+        </GSAPWordReveal>
+      </div>
       <div className="step-grid">
         {[
           { icon: <Upload size={20} />, step: "01", title: "Upload your CV", desc: "AI parses your resume to craft hyper-relevant questions based on your exact skills and gaps.", color: "var(--teal)" },
@@ -1565,11 +1694,17 @@ const Landing = ({ onNav, onCheckout }) => {
     <GSAPReveal fromY={50} delay={0.05}>
     <section id="features-section" style={{ padding: "96px clamp(20px,5vw,60px) 112px", background: "var(--ivory)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 60 }}>
-          <Tag color="slate"><Zap size={10} /> Why PlacementDo</Tag>
-          <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, letterSpacing: "-0.04em", color: "var(--slate)", marginTop: 16, lineHeight: 1.04 }}>The unfair advantage</h2>
-          <p style={{ fontSize: 16, color: "var(--slate-500)", maxWidth: 520, margin: "14px auto 0", lineHeight: 1.76 }}>Built on the same AI infrastructure used to train Fortune 500 hiring managers.</p>
-        </motion.div>
+        <div style={{ textAlign:"center", marginBottom:60 }}>
+          <GSAPReveal delay={0}>
+            <Tag color="slate"><Zap size={10} /> Why PlacementDo</Tag>
+          </GSAPReveal>
+          <GSAPWordReveal className="brig" style={{ fontSize:"clamp(26px,4.5vw,52px)", fontWeight:800, letterSpacing:"-0.04em", color:"var(--slate)", marginTop:16, lineHeight:1.04 }}>
+            The unfair advantage
+          </GSAPWordReveal>
+          <GSAPReveal delay={0.1}>
+            <p style={{ fontSize:16, color:"var(--slate-500)", maxWidth:520, margin:"14px auto 0", lineHeight:1.76 }}>Built on the same AI infrastructure used to train Fortune 500 hiring managers.</p>
+          </GSAPReveal>
+        </div>
         <div className="feature-grid stagger">
           {[
             { icon: <Brain size={20} />, title: "CV-contextual questions", desc: "AI reads your resume and generates hyper-specific questions about your exact projects, claims, and gaps.", color: "var(--teal)" },
@@ -1650,14 +1785,72 @@ const Landing = ({ onNav, onCheckout }) => {
     </section>
     </GSAPReveal>
 
+    {/* ── PERSONAS SHOWCASE — GSAP Horizontal Scroll ──
+        This section demonstrates the core GSAP pattern:
+        User Scroll → Animation Timeline → UI State.
+        ScrollTrigger pins the section and scrubs the
+        card track sideways as the user scrolls down. */}
+    <section style={{ padding:"96px 0 0", background:"var(--dark)", borderTop:"1px solid var(--border)", overflow:"hidden" }}>
+      <div style={{ textAlign:"center", marginBottom:52, padding:"0 clamp(20px,5vw,60px)" }}>
+        <GSAPReveal delay={0}>
+          <Tag color="purple"><Sparkles size={10}/> AI Interviewers</Tag>
+        </GSAPReveal>
+        <GSAPWordReveal className="brig" style={{ fontSize:"clamp(26px,4.5vw,52px)", fontWeight:800, letterSpacing:"-0.04em", color:"var(--slate)", marginTop:16, lineHeight:1.04 }}>
+          Meet Your AI Interviewers
+        </GSAPWordReveal>
+        <GSAPReveal delay={0.12}>
+          <p style={{ fontSize:16, color:"var(--slate-500)", maxWidth:520, margin:"14px auto 0", lineHeight:1.76 }}>
+            Six distinct personalities — each targeting a different psychological pressure point.
+          </p>
+          <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:6, marginTop:18, color:"var(--slate-400)", fontSize:12, fontWeight:500 }}>
+            <span>Scroll to explore</span>
+            <ChevronRight size={14} style={{ color:"var(--violet)" }}/>
+          </div>
+        </GSAPReveal>
+      </div>
+      <GSAPHorizontalScroll>
+        {PERSONAS.map(p => (
+          <div key={p.id} style={{
+            flexShrink:0, width:"clamp(270px,26vw,320px)",
+            padding:"30px 26px", borderRadius:20,
+            background:"rgba(12,9,22,0.9)", border:"1px solid var(--border-subtle)",
+            backdropFilter:"blur(20px)", WebkitBackdropFilter:"blur(20px)",
+            display:"flex", flexDirection:"column",
+            transition:"border-color 0.2s, box-shadow 0.2s",
+          }}
+          onMouseEnter={e=>{e.currentTarget.style.borderColor="var(--border-strong)";e.currentTarget.style.boxShadow="var(--shadow-violet)";}}
+          onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--border-subtle)";e.currentTarget.style.boxShadow="none";}}>
+            <div style={{ fontSize:42, marginBottom:14, lineHeight:1 }}>{p.emoji}</div>
+            <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:12 }}>
+              <Tag color={p.tier==="elite"?"purple":p.tier==="pro"?"teal":"amber"} size="xs">{p.tier.toUpperCase()}</Tag>
+              <span style={{ fontSize:10.5, fontWeight:700, color:p.accentColor, letterSpacing:"0.04em" }}>{p.difficulty}</span>
+            </div>
+            <h3 className="brig" style={{ fontSize:18, fontWeight:700, color:"var(--white)", letterSpacing:"-0.03em", marginBottom:8, lineHeight:1.2 }}>{p.title}</h3>
+            <p style={{ fontSize:13, color:"var(--slate)", lineHeight:1.68, flex:1 }}>{p.vibe}</p>
+            <div style={{ marginTop:16, borderTop:"1px solid var(--border-subtle)", paddingTop:14, display:"flex", flexWrap:"wrap", gap:6 }}>
+              {p.traits.map(t=>(
+                <span key={t} style={{ fontSize:10.5, padding:"3px 9px", borderRadius:10, background:"rgba(139,92,246,0.08)", border:"1px solid var(--border-subtle)", color:"var(--slate-400)" }}>{t}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </GSAPHorizontalScroll>
+    </section>
+
     {/* PRICING */}
     <GSAPReveal fromY={50} delay={0.05}>
     <section id="pricing-section" style={{ padding: "104px clamp(20px,5vw,60px)", maxWidth: 1100, margin: "0 auto" }}>
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} viewport={{ once: true }} style={{ textAlign: "center", marginBottom: 60 }}>
-        <Tag color="teal">Pricing</Tag>
-        <h2 className="brig" style={{ fontSize: "clamp(26px,4.5vw,52px)", fontWeight: 800, letterSpacing: "-0.04em", color: "var(--slate)", marginTop: 16, lineHeight: 1.04 }}>One interview could change everything</h2>
-        <p style={{ fontSize: 15.5, color: "var(--slate-500)", marginTop: 12, lineHeight: 1.68 }}>No subscriptions. No auto-renewals. Join the waitlist for early-bird pricing.</p>
-      </motion.div>
+      <div style={{ textAlign:"center", marginBottom:60 }}>
+        <GSAPReveal delay={0}>
+          <Tag color="teal">Pricing</Tag>
+        </GSAPReveal>
+        <GSAPWordReveal className="brig" style={{ fontSize:"clamp(26px,4.5vw,52px)", fontWeight:800, letterSpacing:"-0.04em", color:"var(--slate)", marginTop:16, lineHeight:1.04 }}>
+          One interview could change everything
+        </GSAPWordReveal>
+        <GSAPReveal delay={0.1}>
+          <p style={{ fontSize:15.5, color:"var(--slate-500)", marginTop:12, lineHeight:1.68 }}>No subscriptions. No auto-renewals. Join the waitlist for early-bird pricing.</p>
+        </GSAPReveal>
+      </div>
       <div className="pricing-grid stagger">
         {PLANS.map(({ name, price, old, hi, tagline, features }, i) => (
           <motion.div key={name} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.1 }} viewport={{ once: true }}
@@ -1757,9 +1950,11 @@ const Landing = ({ onNav, onCheckout }) => {
             <Bell size={26} style={{ color: "var(--teal-mid)" }} />
           </motion.div>
           <Tag color="teal"><Sparkles size={11} /> Be First. Get Early Access.</Tag>
-          <h2 className="brig" style={{ fontSize: "clamp(26px,5vw,54px)", fontWeight: 800, letterSpacing: "-0.04em", color: "#fff", marginTop: 20, marginBottom: 14, lineHeight: 1.03 }}>
-            Your dream offer is<br />one practice away
-          </h2>
+          <GSAPClipReveal style={{ marginTop:20, marginBottom:14 }}>
+            <h2 className="brig" style={{ fontSize: "clamp(26px,5vw,54px)", fontWeight: 800, letterSpacing: "-0.04em", color: "#fff", lineHeight: 1.03 }}>
+              Your dream offer is<br />one practice away
+            </h2>
+          </GSAPClipReveal>
           <p style={{ fontSize: "clamp(14px,2vw,16px)", color: "rgba(255,255,255,.48)", marginBottom: 38, lineHeight: 1.70 }}>
             Join 2,400+ candidates already on the waitlist. Early members get <strong style={{ color: "rgba(255,255,255,.85)" }}>30% off</strong> at launch.
           </p>
